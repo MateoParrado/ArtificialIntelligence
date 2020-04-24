@@ -4,7 +4,7 @@
 #define SPEED_CAP 1.5
 
 //the maximum force applied to an entity
-#define MAX_FORCE 0.015
+#define MAX_FORCE 0.01
 
 //width and height of windows
 #define WINDOW_WIDTH 600

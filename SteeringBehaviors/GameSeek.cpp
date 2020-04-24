@@ -1,12 +1,11 @@
 #include "GameSeek.h"
-#include "SeekState.h"
 
 GameSeek* GameSeek::instance = nullptr;
 
 void GameSeek::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->changeState(Seek);
+	sprite->seekOn();
 	//sprite->setVelocity(0.01, 0.01);
 }
 

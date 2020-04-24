@@ -1,12 +1,11 @@
 #include "GameFlee.h"
-#include "FleeState.h"
 
 GameFlee* GameFlee::instance = nullptr;
 
 void GameFlee::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->changeState(Flee);
+	sprite->fleeOn();
 	//sprite->setVelocity(0.01, 0.01);
 }
 

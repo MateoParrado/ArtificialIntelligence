@@ -27,13 +27,10 @@
     <ClCompile Include="GameSeek.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SeekState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameFlee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FleeState.cpp">
+    <ClCompile Include="Steering.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +44,10 @@
     <ClInclude Include="GameSeek.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SeekState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameFlee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FleeState.h">
+    <ClInclude Include="Steering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
