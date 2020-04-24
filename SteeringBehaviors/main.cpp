@@ -4,6 +4,7 @@
 #include "Definitions.h"
 #include "GameSeek.h"
 #include "GameFlee.h"
+#include "GameArrive.h"
 
 #undef main
 
@@ -50,6 +51,8 @@ int main()
 							GameSeek::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
 						if(GameFlee::getInstance()->sprite)
 							GameFlee::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+						if (GameArrive::getInstance()->sprite)
+							GameArrive::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
 					}
 					else if (event.type == SDL_KEYDOWN)
 					{
@@ -60,6 +63,9 @@ int main()
 							break;
 						case SDLK_2:
 							m.changeState(GameFlee::getInstance());
+							break;
+						case SDLK_3:
+							m.changeState(GameArrive::getInstance());
 							break;
 						}
 					}

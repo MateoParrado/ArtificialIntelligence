@@ -11,7 +11,7 @@ public:
 	{
 		Vector temp = target - pos;
 		temp.normalize();
-		Vector targetSpeed = temp * SPEED_CAP;
+		temp *= SPEED_CAP;
 		temp -= vel;
 
 		return temp;
@@ -21,10 +21,32 @@ public:
 	{
 		Vector temp = pos - target;
 		temp.normalize();
-		Vector targetSpeed = temp * SPEED_CAP;
+		temp *= SPEED_CAP;
 		temp -= vel;
 
 		return temp;
+	}
+
+	Vector arrive(Vector target, Vector pos, Vector vel, double decelRate)
+	{
+		Vector temp = target - pos;
+		
+		double dist = temp.length();
+
+		if (dist > 0)
+		{
+			double speed = dist / 10;
+
+			speed = (speed < SPEED_CAP) ? speed : SPEED_CAP;
+
+			temp.normalize();
+			temp *= speed;
+			temp -= vel;
+
+			return temp;
+		}
+
+		return Vector::Zero();
 	}
 };
 

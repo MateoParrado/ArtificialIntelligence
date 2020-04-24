@@ -14,7 +14,7 @@ int main()
 		s.setVelocity(30, 0);
 		SimpleSprite s1(100, 300);
 		//s1.setAngularAcceleration(.000001);
-		s1.setAcceleration(0, 0.0001);
+		s1.setAcceleration(0, 1);
 		SimpleSprite s2(300, 100);
 		//s2.setAngularVelocity(-0.0002);
 		s2.setLocalVelocity(0.02, 0);

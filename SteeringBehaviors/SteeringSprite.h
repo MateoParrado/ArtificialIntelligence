@@ -8,7 +8,7 @@ class SteeringSprite :
 private:
 	Steering steer;
 
-	bool seek, flee;
+	bool seek, flee, arrive;
 	
 public:
 	Vector target;
@@ -31,6 +31,8 @@ public:
 	void seekOff() { seek = false; }
 	void fleeOn() { flee = true; }
 	void fleeOff() { flee = false; }
+	void arriveOn() { arrive = true; }
+	void arriveOff() { arrive = false; }
 
 	virtual ~SteeringSprite() 
 	{

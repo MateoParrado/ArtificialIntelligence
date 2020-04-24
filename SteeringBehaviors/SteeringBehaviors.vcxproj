@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameArrive.cpp" />
     <ClCompile Include="GameFlee.cpp" />
     <ClCompile Include="GameSeek.cpp" />
     <ClCompile Include="main.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="SteeringSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameArrive.h" />
     <ClInclude Include="GameFlee.h" />
     <ClInclude Include="GameSeek.h" />
     <ClInclude Include="Steering.h" />
