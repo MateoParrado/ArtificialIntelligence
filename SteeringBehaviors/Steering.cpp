@@ -1,5 +1,6 @@
 #include "Steering.h"
 #include "Definitions.h"
+#include <stdlib.h>
 
 //go from vector pos to vector target, overshooting it and them coming back
 Vector Steering::seek(Vector target, Vector pos, Vector vel)
@@ -55,4 +56,27 @@ Vector Steering::arrive(Vector target, Vector pos, Vector vel, double decelRate)
 
 	//if we're there then just return 0
 	return Vector::Zero();
+}
+
+//generates ramdon seeming movement
+Vector Steering::wander(Vector& wanderTarget, Vector pos,double rad, double dist, double jitter, double angle, Vector* test)
+{
+	//add small amount to target
+	wanderTarget += Vector((static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter,
+						   (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter);
+
+	//project it back on the unit circle
+	wanderTarget.normalize();
+
+	//multiply it by the desired radius
+	wanderTarget *= rad;
+
+	//offset it
+	Vector localTarget = wanderTarget + Vector(0, -dist) + pos;
+
+	//put it in world coordinates
+	localTarget = Vector::rotate_point(pos, localTarget, angle);
+	*test = localTarget;
+
+	return localTarget - pos;
 }

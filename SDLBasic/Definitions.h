@@ -3,7 +3,7 @@
 #define FPS 30 
 
 //cap the speed of a moving entity
-#define SPEED_CAP FPS
+#define SPEED_CAP 5
 
 //the maximum force applied to an entity
 #define MAX_FORCE 01

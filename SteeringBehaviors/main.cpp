@@ -20,6 +20,7 @@
 #include "GameSeek.h"
 #include "GameFlee.h"
 #include "GameArrive.h"
+#include "GameWander.h"
 
 #undef main
 
@@ -86,6 +87,9 @@ int main()
 							break;
 						case SDLK_3:
 							m.changeState(GameArrive::getInstance());
+							break;
+						case SDLK_4:
+							m.changeState(GameWander::getInstance());
 							break;
 						}
 					}

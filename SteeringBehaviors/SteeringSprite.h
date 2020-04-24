@@ -16,10 +16,10 @@ private:
 	Steering steer;
 
 	//note that more than one of these can be active at once
-	bool seek, flee, arrive;
+	bool seek, flee, arrive, wander;
 	
 public:
-	Vector target;
+	Vector target, testVec;
 
 	SteeringSprite(double x, double y);
 
@@ -35,12 +35,15 @@ public:
 		target = vec;
 	}
 
+	//enable and disable states
 	void seekOn() { seek = true; }
 	void seekOff() { seek = false; }
 	void fleeOn() { flee = true; }
 	void fleeOff() { flee = false; }
 	void arriveOn() { arrive = true; }
 	void arriveOff() { arrive = false; }
+	void wanderOn() { wander = true; }
+	void wanderOff() { wander = false; }
 
 	virtual ~SteeringSprite() 
 	{

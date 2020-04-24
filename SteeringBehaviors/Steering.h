@@ -18,5 +18,12 @@ public:
 	//go to a target and stop
 	Vector arrive(Vector target, Vector pos, Vector vel, double decelRate);
 
+	//follow a random looking path
+	//rad is the radius of the wander circle
+	//dist is the distance from the wander circle to the entity
+	//jitter is the speed at which the target position changes
+	//test vec is unneccessary, but used to display the target point in the graphics
+	Vector wander(Vector& wanderTarget, Vector pos, double rad, double dist, double jitter, double angle, Vector* test);
+
 };
 
