@@ -4,6 +4,7 @@
 #include "State.h"
 #include <string>
 
+//possible local states: cook stew, cook steak (triggered by a message from fisherman)
 class Chef :
 	public Entity
 {

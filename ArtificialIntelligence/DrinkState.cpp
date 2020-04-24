@@ -15,6 +15,7 @@ void DrinkState::exit(Fisherman* f)
 	f->display("That was refreshing!");
 }
 
+//change what we drink based on our location, and subtract the money if it costs something
 void DrinkState::execute(Fisherman* f)
 {
 	switch (f->getLocation())
@@ -31,5 +32,6 @@ void DrinkState::execute(Fisherman* f)
 		break;
 	}
 
+	//this is a blip state, so continuewhat we are doing
 	f->revertState();
 }

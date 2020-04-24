@@ -1,5 +1,7 @@
 #pragma once
 #include "VehicleSprite.h"
+
+//a vehicle sprite that draws a triangle on a renderer
 class SimpleSprite :
 	public VehicleSprite
 {

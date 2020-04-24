@@ -3,6 +3,7 @@
 #include "SteeringManager.h"
 #include "SteeringSprite.h"
 
+//the gamestate in which we have one sprite that is fleeing a point and going as far away from it as possible that is controlled by mouse clicks
 class GameFlee :
 	public State<SteeringManager>
 {

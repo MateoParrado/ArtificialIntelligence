@@ -6,7 +6,6 @@ void GameSeek::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
 	sprite->seekOn();
-	//sprite->setVelocity(0.01, 0.01);
 }
 
 void GameSeek::exit(SteeringManager* s)
@@ -16,11 +15,14 @@ void GameSeek::exit(SteeringManager* s)
 
 void GameSeek::execute(SteeringManager* s)
 {
+	//when the game starts it doesn't call enter for us, so we need to call it ourselves to initialize our sprite
 	if (!sprite) enter(s);
 
+	//update sprite
 	sprite->draw(s->renderer);
 	sprite->update();
 
+	//target rectangle
 	SDL_Rect r;
 	r.x = (int)sprite->target.getX();
 	r.y = (int)sprite->target.getY();

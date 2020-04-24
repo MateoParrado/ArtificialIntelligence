@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Chef.h"
 
+//the state in which the chef cooks stew, which he is doing constantly unless prompted by a message from the fisherman
 class CookStewState :
 	public State<Chef>
 {

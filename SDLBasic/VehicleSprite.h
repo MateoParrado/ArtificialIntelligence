@@ -2,6 +2,9 @@
 #include "Sprite.h"
 #include "Definitions.h"
 
+//TODO implement set local acceleration
+
+//a sprite that includes physics capabilities
 class VehicleSprite :
 	public Sprite
 {
@@ -9,7 +12,6 @@ protected:
 	Vector velocity;
 	Vector acceleration;
 
-	//double angularAcceleration, angularVelocity;
 	double angle;
 
 
@@ -17,7 +19,7 @@ public:
 	double mass;
 
 	VehicleSprite(double x, double y, double mass) : Sprite(x, y), velocity(0, 0), acceleration(0, 0), mass(mass),
-										angle(-M_PI/2)//, angularAcceleration(0), angularVelocity(0)
+													 angle(-M_PI/2)
 	{
 
 	};
@@ -73,15 +75,5 @@ public:
 	{
 		return velocity;
 	}
-
-	//void setAngularVelocity(double vel)
-	//{
-	//	angularVelocity = vel;
-	//}
-
-	//void setAngularAcceleration(double vel)
-	//{
-	//	angularAcceleration = vel;
-	//}
 };
 

@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Fisherman.h"
 
+//state in which the fisherman is eating at the restaurant
 class EatState :
 	public State<Fisherman>
 {

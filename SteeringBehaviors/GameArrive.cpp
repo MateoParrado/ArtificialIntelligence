@@ -15,11 +15,13 @@ void GameArrive::exit(SteeringManager* s)
 
 void GameArrive::execute(SteeringManager* s)
 {
+	//when setting this on startup enter is not called, so we must do it ourselves if we are the first state
 	if (!sprite) enter(s);
 
 	sprite->draw(s->renderer);
 	sprite->update();
 
+	//target rect
 	SDL_Rect r;
 	r.x = (int)sprite->target.getX();
 	r.y = (int)sprite->target.getY();

@@ -18,6 +18,7 @@ void SellState::exit(Fisherman* f)
 	f->display("Leaving the market");
 }
 
+//sell the fish, gain money, and lose all the fish
 void SellState::execute(Fisherman* f)
 {
 	f->display("Selling my fish at the market!");

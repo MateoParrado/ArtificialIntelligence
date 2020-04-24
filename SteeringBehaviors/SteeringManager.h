@@ -2,12 +2,15 @@
 #include "StateMachine.h"
 #include "SDL.h"
 
+//game controller class
 class SteeringManager
 {
 private:
+	//states are game states
 	StateMachine<SteeringManager>* stateMach;
 
 public:
+	//stored to pass to states so that they can display their sprites
 	SDL_Renderer* renderer;
 
 	SteeringManager(SDL_Renderer* r);

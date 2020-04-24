@@ -2,6 +2,9 @@
 #include "State.h"
 #include "Chef.h"
 
+//state in which the fisherman eats steak
+//previous state will always be waiting for food state
+//triggered by a message from the chef that the food is ready
 class CookSteakState :
 	public State<Chef>
 {

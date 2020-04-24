@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "Entity.h"
 
+//right below base game entity, base class for all graphical entities
 class Sprite : public Entity
 {
 protected:

@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Fisherman.h"
 
+//used to control teh drink blip state of the fisherman
 class FishermanGlobalState :
 	public State<Fisherman>
 {

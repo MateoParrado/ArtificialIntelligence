@@ -1,3 +1,17 @@
+/////////////////////////////////////////////////////////////////////////
+//							  SDL BASIC								   //
+//																	   //
+//				PROJECT TO SET UP AND TEST A SIMPLE SDL				   //
+//						DISPLAY, AND MAKE A SPRITE					   //
+//							  ARCHITECTURE							   //
+//																	   //
+//																	   //
+//						DISPLAYS THREE SPRITES,      				   //
+//						EACH MOVING DIFFERENTLY						   //
+//																	   //
+//																	   //
+/////////////////////////////////////////////////////////////////////////
+
 #include <SDL.h> 
 #include "SimpleSprite.h"
 #include "Definitions.h"
@@ -12,11 +26,11 @@ int main()
 
 		SimpleSprite s(300, 300);
 		s.setVelocity(30, 0);
+
 		SimpleSprite s1(100, 300);
-		//s1.setAngularAcceleration(.000001);
 		s1.setAcceleration(0, 1);
+
 		SimpleSprite s2(300, 100);
-		//s2.setAngularVelocity(-0.0002);
 		s2.setLocalVelocity(0.02, 0);
 
 		if (SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer) == 0)
@@ -28,6 +42,7 @@ int main()
 
 			while (!done)
 			{
+				//get time since start of program
 				startingTick = SDL_GetTicks();
 
 				SDL_Event event;
@@ -35,10 +50,12 @@ int main()
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 				SDL_RenderClear(renderer);
 
+				//draw sprites
 				s.draw(renderer);
 				s1.draw(renderer);
 				s2.draw(renderer);
 
+				//update sprites
 				s1.update();
 				s.update();
 				s2.update();
@@ -53,6 +70,7 @@ int main()
 				
 				SDL_RenderPresent(renderer);
 
+				//used to maintain steady framerate
 				if ((1000 / FPS) > SDL_GetTicks() - startingTick)
 				{
 					SDL_Delay((1000 / FPS) - (SDL_GetTicks() - startingTick));

@@ -1,6 +1,6 @@
 #pragma once
 
-#define FPS 30
+#define FPS 30 
 
 //cap the speed of a moving entity
 #define SPEED_CAP FPS

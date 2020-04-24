@@ -11,17 +11,20 @@ public:
 	Vector() :x(0), y(0) {}
 	Vector(double a, double b) :x(a), y(b) {}
 
+	//get a zero vector
 	static Vector Zero()
 	{
 		return Vector(0, 0);
 	}
 
+	//zero this vector
 	void zero()
 	{
 		x = 0;
 		y = 0;
 	}
 
+	//getters and setters
 	double getX() const { return x; }
 	double getY() const { return y; }
 	void setX(double x) { this->x = x; }
@@ -42,6 +45,7 @@ public:
 		return x * x + y * y;
 	}
 
+	//set magnitude to 1
 	void normalize() 
 	{
 		double temp = length();
@@ -65,12 +69,14 @@ public:
 	return 1; //clockwise
 	}
 
-	//TODO IMPLEMENT THIS	
+	//TODO IMPLEMENT THIS
+	//gets the perpendicular vector
 	Vector perp() const
 	{
 
 	}
 
+	//limit the length to max
 	void truncate(double max)
 	{
 		if (length() < max) return;

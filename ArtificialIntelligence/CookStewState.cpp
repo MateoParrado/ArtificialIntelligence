@@ -26,11 +26,14 @@ void CookStewState::execute(Chef* c)
 	c->changeState(CookStew);
 }
 
+//we cook stew continuously until someone orders steak
 bool CookStewState::onMessage(Chef* c, const Telegram& msg)
 {
 	if (msg.message == MAKEMESTEAK)
 	{
 		c->changeState(CookSteak);
+
+		//send a message to self in 0.5 seconds that the steak is ready (to account for cooking time)
 		Dispatcher->dispatchMessage(c->getId(), c->getId(), STEAKREADY, 0.5);
 		return true;
 	}

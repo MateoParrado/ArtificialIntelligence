@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Telegram.h"
 
+//the state machine used to implement every state change and every game controller
 template<class T>
 class StateMachine
 {
@@ -33,14 +34,19 @@ public:
 
 	void changeState(State<T>* s)
 	{
+		//call exit of current state
 		if(currState) currState->exit(owner);
 
+		//call enter of new state
 		s->enter(owner);
 
+		//save previous state for state reversions
 		prevState = currState;
+
 		currState = s;
 	}
 
+	//go back to previous state
 	void revertState()
 	{
 		changeState(prevState);
@@ -55,11 +61,12 @@ public:
 		}
 
 		//if we have a global state, and it doesnt get handled above, and global state handles it
-		else if (globState && globState->onMessage(owner, msg))
+		if (globState && globState->onMessage(owner, msg))
 		{
 			return true;
 		}
 
+		//none of our states can handle it
 		return false;
 	}
 
@@ -68,6 +75,7 @@ public:
 	State<T>* globalState() const { return globState; }
 	State<T>* previousState() const { return prevState; }
 
+	//returns true if we are currently in state s
 	bool isInState(const State<T>& s) const
 	{
 		return s.currentState() == this->currentState();

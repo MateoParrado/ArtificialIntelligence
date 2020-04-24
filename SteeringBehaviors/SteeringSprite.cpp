@@ -5,6 +5,7 @@
 
 SteeringSprite::SteeringSprite(double x, double y) : SimpleSprite(x, y)
 {
+	//initialize to be doing nothing
 	seek = flee = arrive = false;
 
 	target = Vector(300, 300);
@@ -15,6 +16,7 @@ void SteeringSprite::update()
 {
 	Vector force = Vector::Zero();
 
+	//check what behaviors are active and do them if they are
 	if (seek)
 	{
 		force += steer.seek(target, this->pos, this->velocity);

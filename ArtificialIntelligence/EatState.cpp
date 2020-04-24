@@ -24,5 +24,5 @@ void EatState::execute(Fisherman* f)
 	f->money -= 2;
 	f->hunger = 0;
 
-	f->changeState(Fish);
+	f->changeState(Fish); 
 }

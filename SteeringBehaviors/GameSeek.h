@@ -3,6 +3,7 @@
 #include "SteeringManager.h"
 #include "SteeringSprite.h"
 
+//the gamestate in which we have one sprite that is seeking a point changed by clicking on the screen
 class GameSeek :
 	public State<SteeringManager>
 {
@@ -11,7 +12,6 @@ private:
 	GameSeek& operator=(const GameSeek&) = delete;
 
 	static GameSeek* instance;
-
 
 	Vector seekPoint;
 

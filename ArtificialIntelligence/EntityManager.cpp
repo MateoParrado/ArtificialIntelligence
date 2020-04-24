@@ -2,6 +2,7 @@
 
 EntityManager* EntityManager::instance = nullptr;
 
+//when an entity is created this is called, used for message handling
 void EntityManager::registerEntity(Entity* e)
 {
 	entityMap.insert(std::pair<int, Entity*>(e->getId(), e));

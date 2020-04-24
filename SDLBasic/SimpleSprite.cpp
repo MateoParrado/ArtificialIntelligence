@@ -1,7 +1,9 @@
 #include "SimpleSprite.h"
 
+//display a triangle
 void SimpleSprite::draw(SDL_Renderer* renderer) const
 {
+	//handle the rotation
 	Vector c1 = Vector::rotate_point(pos, Vector(pos.getX(), pos.getY() - 20), angle);
 	Vector c2 = Vector::rotate_point(pos, Vector(pos.getX() - 10, pos.getY() + 20), angle);
 	Vector c3 = Vector::rotate_point(pos, Vector(pos.getX() + 10, pos.getY() + 20), angle);
@@ -12,12 +14,15 @@ void SimpleSprite::draw(SDL_Renderer* renderer) const
 	SDL_RenderDrawLine(renderer, (int)c3.getX(), (int)c3.getY(), (int)c1.getX(), (int)c1.getY());
 }
 
-//weird warning in this code
+//weird warning in this code about width of data, ignore it
 #pragma warning( disable : 26451 )
+
 void SimpleSprite::update()
 {
+	//handle physics
 	VehicleSprite::update();
 
+	//wrap around the screen if we went past it
 	if (pos.getX() > WINDOW_WIDTH + 20)
 	{
 		pos.setX(-20);

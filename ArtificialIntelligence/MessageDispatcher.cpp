@@ -9,11 +9,13 @@ MessageDispatcher::MessageDispatcher() :startTime(clock())
 
 }
 
+//send a message to an entity
 void MessageDispatcher::discharge(Entity* receiver, const Telegram& msg)
 {
 	receiver->handleMessage(msg);
 }
 
+//public function used to tell class to send a message
 void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType msg)
 {
 	Entity* rec = EntityMgr->getEntity(receiver);
@@ -23,6 +25,7 @@ void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType ms
 	discharge(rec, t);
 }
 
+//this overload includes a message delay
 void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType msg, double delay)
 {
 	Entity* rec = EntityMgr->getEntity(receiver);
@@ -42,6 +45,7 @@ void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType ms
 	}
 }
 
+//this overload includes a void* for any extra info needed along with the message
 void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType msg, void* extraInfo)
 {
 	Entity* rec = EntityMgr->getEntity(receiver);
@@ -51,6 +55,7 @@ void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType ms
 	discharge(rec, t);
 }
 
+//this overload includes both a delay and a void*
 void MessageDispatcher::dispatchMessage(int sender, int receiver, MessageType msg, double delay, void* extraInfo)
 {
 	Entity* rec = EntityMgr->getEntity(receiver);
@@ -75,6 +80,7 @@ void MessageDispatcher::dispatchDelayedMessages()
 {
 	double currTime = clock();
 
+	//check if we have passed the dispatch time for any messages
 	while (queue.size() && queue.begin()->dispatchTime < currTime)
 	{
 		Telegram t = *queue.begin();

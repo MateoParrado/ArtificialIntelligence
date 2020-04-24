@@ -4,8 +4,9 @@
 #include "StateMachine.h"
 #include "State.h"
 #include <string>
-//#include "FishingState.h"
 
+//Possible local states: eat, drink (blip state), fishing, sell, waitforfood (when waiting for a message from the chef)
+//Possible global states: fisherman global state
 class Fisherman : public Entity
 {
 private:

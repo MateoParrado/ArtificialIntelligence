@@ -2,12 +2,20 @@
 #include "SimpleSprite.h"
 #include "Steering.h"
 
+//TODO: MAKE THE BOOLS LIKE	seek, flee and arrive a bit thing that we or together
+
+//THIS CLASS IS DERIVED FROM:
+//Entity/Sprite for abstract functionality
+//VehicleSprite for physics
+//SimpleSprite for graphics
+//this class is an implementation of simple sprite where the behavior is controller by steering behaviors
 class SteeringSprite :
 	public SimpleSprite
 {
 private:
 	Steering steer;
 
+	//note that more than one of these can be active at once
 	bool seek, flee, arrive;
 	
 public:

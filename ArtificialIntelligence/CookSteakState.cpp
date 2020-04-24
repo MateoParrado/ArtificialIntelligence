@@ -16,7 +16,6 @@ void CookSteakState::enter(Chef* c)
 void CookSteakState::exit(Chef* c)
 {
 	c->display("That steak looked good");
-	//c->revertState();
 }
 
 void CookSteakState::execute(Chef* c)
@@ -25,11 +24,16 @@ void CookSteakState::execute(Chef* c)
 
 }
 
+//the message received here should be sent by the chef himself
+//sends a message to the fisherman if the steak is done
 bool CookSteakState::onMessage(Chef* c, const Telegram& msg)
 {
 	if (msg.message == STEAKREADY)
 	{
+		//id 0 is the fisherman
 		Dispatcher->dispatchMessage(c->getId(), 0, STEAKREADY);
+
+		//go back to cooking stew
 		c->changeState(CookStew);
 		return true;
 	}

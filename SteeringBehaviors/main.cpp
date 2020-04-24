@@ -1,3 +1,18 @@
+/////////////////////////////////////////////////////////////////////////
+//					     STEERING BEHAVIORS							   //
+//																	   //
+//				PROJECT TO DEMONSTRATE A VARIETY OF SIMPLE   		   //
+//					STEERING BEHAVIORS ON SPRITES					   //
+//																	   //
+//				NUMBER KEYS CHANGE THE CURRENT BEHAVIOR      		   //
+//				MOUSE CLICKS CHANGE THE TARGET POSITION				   //
+//																	   //
+//																	   //
+//																	   //
+//																	   //
+/////////////////////////////////////////////////////////////////////////
+
+
 #include <SDL.h> 
 #include "SteeringSprite.h"
 #include "SteeringManager.h"
@@ -21,6 +36,7 @@ int main()
 
 		if (SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer) == 0)
 		{
+			//this is the game controller, it handles the displaying and updating of the correct group of sprites in the right steering behavior
 			SteeringManager m(renderer);
 			
 			SDL_bool done = SDL_FALSE;
@@ -30,6 +46,7 @@ int main()
 
 			while (!done)
 			{
+				//get milliseconds since program start
 				startingTick = SDL_GetTicks();
 
 				SDL_Event event;
@@ -37,6 +54,7 @@ int main()
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 				SDL_RenderClear(renderer);
 
+				//update and draw current game state
 				m.update();
 
 				while (SDL_PollEvent(&event))
@@ -47,6 +65,7 @@ int main()
 					}
 					else if (event.type == SDL_MOUSEBUTTONDOWN)
 					{
+						//set the target for all of the game states sprites, but only if they've been initialized
 						if(GameSeek::getInstance()->sprite)
 							GameSeek::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
 						if(GameFlee::getInstance()->sprite)
@@ -56,6 +75,7 @@ int main()
 					}
 					else if (event.type == SDL_KEYDOWN)
 					{
+						//change gamestate on number key press
 						switch (event.key.keysym.sym)
 						{
 						case SDLK_1:
@@ -73,6 +93,7 @@ int main()
 
 				SDL_RenderPresent(renderer);
 
+				//to cap the framerate
 				if ((1000 / FPS) > SDL_GetTicks() - startingTick)
 				{
 					SDL_Delay((1000 / FPS) - (SDL_GetTicks() - startingTick));

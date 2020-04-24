@@ -3,6 +3,7 @@
 #include "SteeringManager.h"
 #include "SteeringSprite.h"
 
+//the gamestate in which we have one sprite that is seeking a point changed by clicking on the screen, and arriving and stopping at it
 class GameArrive :
 	public State<SteeringManager>
 {

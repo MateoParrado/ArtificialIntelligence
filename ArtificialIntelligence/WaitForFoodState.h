@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Fisherman.h"
 
+//state when fisherman has ordered a steak and is waiting for it to be ready
 class WaitForFoodState :
 	public State<Fisherman>
 {

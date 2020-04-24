@@ -2,6 +2,7 @@
 #include "State.h"
 #include "Fisherman.h"
 
+//a blip state in which the fisherman stops what he's doing and drinks
 class DrinkState :
 	public State<Fisherman>
 {

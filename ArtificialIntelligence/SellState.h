@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Fisherman.h"
 
+//state in which the fisherman goes to the market and sells his fish
 class SellState : public State<Fisherman>
 {
 private:
