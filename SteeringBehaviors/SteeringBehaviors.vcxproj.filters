@@ -27,7 +27,13 @@
     <ClCompile Include="GameSeek.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SteerState.cpp">
+    <ClCompile Include="SeekState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFlee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +47,13 @@
     <ClInclude Include="GameSeek.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SteerState.h">
+    <ClInclude Include="SeekState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFlee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

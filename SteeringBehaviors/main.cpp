@@ -3,6 +3,7 @@
 #include "SteeringManager.h"
 #include "Definitions.h"
 #include "GameSeek.h"
+#include "GameFlee.h"
 
 #undef main
 
@@ -45,7 +46,22 @@ int main()
 					}
 					else if (event.type == SDL_MOUSEBUTTONDOWN)
 					{
-						GameSeek::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+						if(GameSeek::getInstance()->sprite)
+							GameSeek::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+						if(GameFlee::getInstance()->sprite)
+							GameFlee::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+					}
+					else if (event.type == SDL_KEYDOWN)
+					{
+						switch (event.key.keysym.sym)
+						{
+						case SDLK_1:
+							m.changeState(GameSeek::getInstance());
+							break;
+						case SDLK_2:
+							m.changeState(GameFlee::getInstance());
+							break;
+						}
 					}
 				}
 

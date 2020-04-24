@@ -1,16 +1,16 @@
-#include "SteerState.h"
+#include "SeekState.h"
 
-SteerState* SteerState::instance = nullptr;
+SeekState* SeekState::instance = nullptr;
 
-void SteerState::enter(SteeringSprite* s)
+void SeekState::enter(SteeringSprite* s)
 {
 }
 
-void SteerState::exit(SteeringSprite* s)
+void SeekState::exit(SteeringSprite* s)
 {
 }
 
-void SteerState::execute(SteeringSprite* s)
+void SeekState::execute(SteeringSprite* s)
 {	
 	Vector temp = s->target;
 	temp -= s->getPos();

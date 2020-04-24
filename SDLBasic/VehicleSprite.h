@@ -9,9 +9,6 @@ protected:
 	Vector velocity;
 	Vector acceleration;
 
-	Vector localVelocity;
-	Vector localAcceleration;
-
 	//double angularAcceleration, angularVelocity;
 	double angle;
 
@@ -20,7 +17,6 @@ public:
 	double mass;
 
 	VehicleSprite(double x, double y, double mass) : Sprite(x, y), velocity(0, 0), acceleration(0, 0), mass(mass),
-										localVelocity(0, 0), localAcceleration(0, 0),
 										angle(-M_PI/2)//, angularAcceleration(0), angularVelocity(0)
 	{
 
@@ -50,23 +46,23 @@ public:
 
 	void setLocalVelocity(double xv, double yv)
 	{
-		localVelocity = Vector(xv, yv);
+		velocity += Vector::rotate_point(Vector::Zero(), Vector(xv, yv), angle - M_PI / 2);
 	}
 
 	void setLocalVelocity(const Vector& vec)
 	{
-		localVelocity = vec;
+		velocity += Vector::rotate_point(Vector::Zero(), vec, angle - M_PI / 2);
 	}
 
-	void setLocalAcceleration(double xv, double yv)
-	{
-		localAcceleration = Vector(xv, yv);
-	}
+	//void setLocalAcceleration(double xv, double yv)
+	//{
+	//	localAcceleration = Vector(xv, yv);
+	//}
 
-	void setLocalAcceleration(const Vector& vec)
-	{
-		localAcceleration = vec;
-	}
+	//void setLocalAcceleration(const Vector& vec)
+	//{
+	//	localAcceleration = vec;
+	//}
 
 	void applyForce(Vector force)
 	{

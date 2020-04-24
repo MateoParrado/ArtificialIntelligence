@@ -2,21 +2,21 @@
 #include <State.h>
 #include "SteeringSprite.h"
 
-class SteerState :
+class SeekState :
 	public State<SteeringSprite>
 {
 private:
-	SteerState() {}
+	SeekState() {}
 
-	SteerState(const SteerState&) = delete;
-	SteerState& operator=(const SteerState&) = delete;
+	SeekState(const SeekState&) = delete;
+	SeekState& operator=(const SeekState&) = delete;
 
-	static SteerState* instance;
+	static SeekState* instance;
 
 public:
-	static SteerState* getInstance()
+	static SeekState* getInstance()
 	{
-		if (!instance) instance = new SteerState();
+		if (!instance) instance = new SeekState();
 
 		return instance;
 	}
@@ -30,7 +30,7 @@ public:
 		return false;
 	}
 
-	virtual ~SteerState() {}
+	virtual ~SeekState() {}
 };
 
-#define Steer SteerState::getInstance()
+#define Seek SeekState::getInstance()

@@ -1,21 +1,21 @@
-#include "GameSeek.h"
-#include "SeekState.h"
+#include "GameFlee.h"
+#include "FleeState.h"
 
-GameSeek* GameSeek::instance = nullptr;
+GameFlee* GameFlee::instance = nullptr;
 
-void GameSeek::enter(SteeringManager* s)
+void GameFlee::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->changeState(Seek);
+	sprite->changeState(Flee);
 	//sprite->setVelocity(0.01, 0.01);
 }
 
-void GameSeek::exit(SteeringManager* s)
+void GameFlee::exit(SteeringManager* s)
 {
 	delete sprite;
 }
 
-void GameSeek::execute(SteeringManager* s)
+void GameFlee::execute(SteeringManager* s)
 {
 	if (!sprite) enter(s);
 

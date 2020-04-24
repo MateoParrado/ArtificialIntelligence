@@ -129,17 +129,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FleeState.cpp" />
+    <ClCompile Include="GameFlee.cpp" />
     <ClCompile Include="GameSeek.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SteeringManager.cpp" />
     <ClCompile Include="SteeringSprite.cpp" />
-    <ClCompile Include="SteerState.cpp" />
+    <ClCompile Include="SeekState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FleeState.h" />
+    <ClInclude Include="GameFlee.h" />
     <ClInclude Include="GameSeek.h" />
     <ClInclude Include="SteeringManager.h" />
     <ClInclude Include="SteeringSprite.h" />
-    <ClInclude Include="SteerState.h" />
+    <ClInclude Include="SeekState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
