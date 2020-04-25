@@ -5,7 +5,8 @@ GameArrive* GameArrive::instance = nullptr;
 void GameArrive::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->arriveOn();
+	sprite->enableBehaviors(ARRIVE);
+	sprite->setArriveTarget(Vector(300, 300));
 }
 
 void GameArrive::exit(SteeringManager* s)
@@ -23,8 +24,8 @@ void GameArrive::execute(SteeringManager* s)
 
 	//target rect
 	SDL_Rect r;
-	r.x = (int)sprite->getTarget().getX();
-	r.y = (int)sprite->getTarget().getY();
+	r.x = (int)sprite->getArriveTarget().getX();
+	r.y = (int)sprite->getArriveTarget().getY();
 	r.h = 5;
 	r.w = 5;
 

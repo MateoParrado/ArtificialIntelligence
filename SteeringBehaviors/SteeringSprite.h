@@ -1,8 +1,7 @@
 #pragma once
 #include "SimpleSprite.h"
 #include "Steering.h"
-
-//TODO: MAKE THE BOOLS LIKE	seek, flee and arrive a bit thing that we or together
+#include "Definitions.h"
 
 //THIS CLASS IS DERIVED FROM:
 //Entity/Sprite for abstract functionality
@@ -15,12 +14,12 @@ class SteeringSprite :
 private:
 	Steering steer = Steering(this);
 
-	//note that more than one of these can be active at once
-	bool seek, flee, arrive, wander, pursuit;
-	
-	Vector target, testVec;
+	Vector seekTarget, arriveTarget, fleeTarget, wanderTarget;
+	SteeringSprite* pursuitTarget;
 
-	SteeringSprite* targetSprite;
+	//used to store the boolean combination of steering behaviors that are enabled / disabled
+	uint32_t enabledBehaviors;
+
 public:
 	friend class Steering;
 
@@ -33,28 +32,30 @@ public:
 		return false;
 	}
 
-	void setTarget(const Vector& vec)
+	//enable behaviors as defined by the macros in definitions.h
+	void enableBehaviors(uint32_t b)
 	{
-		target = vec;
+		enabledBehaviors |= b;
 	}
 
-	//enable and disable states
-	void seekOn() { seek = true; }
-	void seekOff() { seek = false; }
-	void fleeOn() { flee = true; }
-	void fleeOff() { flee = false; }
-	void arriveOn() { arrive = true; }
-	void arriveOff() { arrive = false; }
-	void wanderOn() { wander = true; }
-	void wanderOff() { wander = false; }
-	void pursuitOn(SteeringSprite* s) { 
-		targetSprite = s;
-		pursuit = true;
+	void disableBehaviors(uint32_t b)
+	{
+		enabledBehaviors &= b;
 	}
-	void pursuitOff() { pursuit = false; }
 
-	const Vector& getTarget() { return target; };
-	const Vector& getTestVec() { return testVec; }
+	//target setters
+	void setSeekTarget(const Vector& t) { seekTarget = t; }
+	void setFleeTarget(const Vector& t) { fleeTarget = t; }
+	void setArriveTarget(const Vector& t) { arriveTarget = t; }
+	void setWanderTarget(const Vector& t) { wanderTarget = t; }
+	void setPursuitTarget(SteeringSprite* t) { pursuitTarget = t; }
+
+	//target getters
+	const Vector& getSeekTarget() const { return seekTarget; };
+	const Vector& getFleeTarget() const { return fleeTarget; };
+	const Vector& getArriveTarget() const { return arriveTarget; };
+
+
 	double getAngle() { return angle; }
 
 	virtual ~SteeringSprite() 

@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-//					     ARTIFICIAL INTELLIGENCE					   //
+//							  FISHERMAN MARTY						   //
 //																	   //
 //				PROJECT TO DEMONSTRATE A SIMPLE RELATIONSHIP   		   //
 //					BETWEEN A FISHERMAN AND A CHEF					   //
@@ -16,8 +16,6 @@
 #include <thread>
 #include <chrono>
 #include "MessageDispatcher.h"
-
-//TODO RENAME THIS PROJECT FISHERMAN MARTY
 
 int main()
 {

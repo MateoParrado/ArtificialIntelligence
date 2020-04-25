@@ -5,7 +5,8 @@ GameFlee* GameFlee::instance = nullptr;
 void GameFlee::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->fleeOn();
+	sprite->enableBehaviors(FLEE);
+	sprite->setFleeTarget(Vector(300, 300));
 }
 
 void GameFlee::exit(SteeringManager* s)
@@ -23,8 +24,8 @@ void GameFlee::execute(SteeringManager* s)
 
 	//target rect
 	SDL_Rect r;
-	r.x = (int)sprite->getTarget().getX();
-	r.y = (int)sprite->getTarget().getY();
+	r.x = (int)sprite->getFleeTarget().getX();
+	r.y = (int)sprite->getFleeTarget().getY();
 	r.h = 5;
 	r.w = 5;
 

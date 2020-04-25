@@ -1,14 +1,10 @@
 #include "SteeringSprite.h"
 #include "EntityManager.h"
 
-//TODO MAKE ARRIVE END ON TIP
-
 SteeringSprite::SteeringSprite(double x, double y) : SimpleSprite(x, y)
 {
 	//initialize to be doing nothing
-	seek = flee = arrive = wander = pursuit = false;
-
-	target = Vector(300, 300);
+	enabledBehaviors = 0;
 	EntityMgr->registerEntity(this);
 }
 
@@ -17,26 +13,26 @@ void SteeringSprite::update()
 	Vector force = Vector::Zero();
 
 	//check what behaviors are active and do them if they are
-	if (seek)
+	if (enabledBehaviors & SEEK)
 	{
-		force += steer.seek();
+		force += steer.seek(seekTarget);
 	}
-	if (flee)
+	if (enabledBehaviors & FLEE)
 	{
-		force += steer.flee();
+		force += steer.flee(fleeTarget);
 	}
-	if (arrive)
+	if (enabledBehaviors & ARRIVE)
 	{
 		//force += steer.arrive(target, Vector::rotate_point(pos, Vector(pos.getX(), pos.getY() - 20), angle), this->velocity, 1);
-		force += steer.arrive(1);
+		force += steer.arrive(arriveTarget, 1);
 	}
-	if (wander)
+	if (enabledBehaviors & WANDER)
 	{
-		force += steer.wander(25, 100, 10);
+		force += steer.wander(&wanderTarget, 25, 100, 10);
 	}
-	if (pursuit)
+	if (enabledBehaviors & PURSUE)
 	{
-		force += steer.pursuit(targetSprite);
+		force += steer.pursuit(pursuitTarget);
 	}
 
 	force.truncate(MAX_FORCE);

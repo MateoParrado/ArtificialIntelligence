@@ -14,20 +14,20 @@ public:
 	Steering(SteeringSprite* _owner) :owner(_owner) {};
 
 	//to towards a target without slowing (passes through)
-	Vector seek();
+	Vector seek(const Vector& target);
 
 	//run away from a target
-	Vector flee();
+	Vector flee(const Vector& target);
 
 	//go to a target and stop
-	Vector arrive(double decelRate);
+	Vector arrive(const Vector& target, double decelRate);
 
 	//follow a random looking path
 	//rad is the radius of the wander circle
 	//dist is the distance from the wander circle to the entity
 	//jitter is the speed at which the target position changes
 	//test vec is unneccessary, but used to display the target point in the graphics
-	Vector wander(double rad, double dist, double jitter);
+	Vector wander(Vector* target, double rad, double dist, double jitter);
 
 	//try and reach the target enemy by predicting their position and seeking towards it
 	Vector pursuit(const SteeringSprite* s);

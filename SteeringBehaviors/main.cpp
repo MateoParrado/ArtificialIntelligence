@@ -50,19 +50,13 @@
 //MAKE AN EVADE SCENE
 //CONGRATULATIONS, YOU HAVE FINISHED THE FIRST GROUP!!!
 //MAKE A MIXTURE SEEK / FLEE WHERE LEFT CLICK PLACES THE SEEK POINT AND RIGHT CLICK PLACES THE FLEE POINT
-//FIGURE OUT A BETTER WAY OF PASSING TARGET AND OTHER NECESSARY INFORMATION LIKE THAT, GETS UNRULY WITH MULTIPLE TARGETS AND NOT EVERYTHING USING THEM
-	//IDEA: MAKE SEEK ON / OFF TAKE IN A TARGET AND THEN EACH ONE OF THE THINGS HAS THEIR OWN ON PARAMETERS AND LOCAL VARIABLES TO USE AND PASS INTO THE FUNCTIONS
-	//functions then need to take in a target parameter
-	//have setter funcitons like set seek target 
-	//then we need safety nullptr checks (maybe)
-//MAKE A TEXT ENTITY (TODO ENTITY.H)
-//RENAME ARTIFICIAL INTELLIGENCE PROJECT (TODO ARTIFICIAL INTELLIGENCE MAIN)
 //IMPLEMENT VECTOR PERP
 //IMPLEMENT SET LOCAL ACCELERATION
 //MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
-//MAKE THE BOOLS LIKE SEEK ARRIVE AND WANDER INTO A BITWISE OR THING (TODO STEERING SPRITE.H)
 //HAVE A HELP GAME STATE BY PRESSING ZERO WHERE IT TELLS WHICH SCENES ARE IN WHICH BUTTONS
 //ALLOW SPRITES TO EACH HAVE THEIR OWN MAX SPEED
+//MAKE ALL TARGETS IN STEERING SPRITE STD::VECTORS SO THEY CAN HAVE A BUNCH OF THEM
+//MAKE SCENE WHERE YOU CLICK TO PLACE A FLEE TARGET BUT IT ONLY FLEES IF ITS WITHIN A CERTAIN DISTANCE AND YOU CAN PLACE A BUNCH
 
 
 int main()
@@ -119,11 +113,11 @@ int main()
 					{
 						//set the target for all of the game states sprites, but only if they've been initialized
 						if(GameSeek::getInstance()->sprite)
-							GameSeek::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+							GameSeek::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
 						if(GameFlee::getInstance()->sprite)
-							GameFlee::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+							GameFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
 						if (GameArrive::getInstance()->sprite)
-							GameArrive::getInstance()->sprite->setTarget(Vector(event.button.x, event.button.y));
+							GameArrive::getInstance()->sprite->setArriveTarget(Vector(event.button.x, event.button.y));
 					}
 					else if (event.type == SDL_KEYDOWN)
 					{

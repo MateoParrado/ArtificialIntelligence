@@ -6,8 +6,8 @@ void GameWander::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
 	sprite1 = new SteeringSprite(300, 300);
-	sprite->wanderOn();
-	sprite1->wanderOn();
+	sprite->enableBehaviors(WANDER);
+	sprite1->enableBehaviors(WANDER);
 }
 
 void GameWander::exit(SteeringManager* s)
@@ -15,6 +15,8 @@ void GameWander::exit(SteeringManager* s)
 	delete sprite1;
 }
 
+//unused right now, but very helpful
+/*
 void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius)
 {
 	const int32_t diameter = (radius * 2);
@@ -52,7 +54,7 @@ void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_
 		}
 	}
 }
-
+*/
 void GameWander::execute(SteeringManager* s)
 {
 	//when the game starts it doesn't call enter for us, so we need to call it ourselves to initialize our sprite
@@ -65,29 +67,4 @@ void GameWander::execute(SteeringManager* s)
 
 	sprite1->draw(s->renderer);
 	sprite1->update();
-
-	Vector rot = Vector::rotate_point(sprite->getPos(), sprite->getPos() + Vector(0, -100), sprite->getAngle());
-
-	DrawCircle(s->renderer, (int32_t)rot.getX(), (int32_t)rot.getY(), 25);
-
-	//target rect
-	SDL_Rect r;
-	r.x = (int)sprite->getTestVec().getX();
-	r.y = (int)sprite->getTestVec().getY();
-	r.h = 5;
-	r.w = 5;
-
-	SDL_RenderFillRect(s->renderer, &r);
-
-	rot = Vector::rotate_point(sprite1->getPos(), sprite1->getPos() + Vector(0, -100), sprite1->getAngle());
-
-	DrawCircle(s->renderer, (int32_t)rot.getX(), (int32_t)rot.getY(), 25);
-
-	//target rect
-	r.x = (int)sprite1->getTestVec().getX();
-	r.y = (int)sprite1->getTestVec().getY();
-	r.h = 5;
-	r.w = 5;
-
-	SDL_RenderFillRect(s->renderer, &r);
 }

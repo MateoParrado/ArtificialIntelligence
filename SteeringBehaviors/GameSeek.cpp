@@ -5,7 +5,8 @@ GameSeek* GameSeek::instance = nullptr;
 void GameSeek::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
-	sprite->seekOn();
+	sprite->enableBehaviors(SEEK);
+	sprite->setSeekTarget(Vector(300, 300));
 }
 
 void GameSeek::exit(SteeringManager* s)
@@ -24,8 +25,8 @@ void GameSeek::execute(SteeringManager* s)
 
 	//target rectangle
 	SDL_Rect r;
-	r.x = (int)sprite->getTarget().getX();
-	r.y = (int)sprite->getTarget().getY();
+	r.x = (int)sprite->getSeekTarget().getX();
+	r.y = (int)sprite->getSeekTarget().getY();
 	r.h = 5;
 	r.w = 5;
 
