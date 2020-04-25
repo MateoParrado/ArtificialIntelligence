@@ -13,13 +13,14 @@ class SteeringSprite :
 	public SimpleSprite
 {
 private:
-	Steering steer;
+	Steering steer = Steering(this);
 
 	//note that more than one of these can be active at once
 	bool seek, flee, arrive, wander;
 	
-public:
 	Vector target, testVec;
+public:
+	friend class Steering;
 
 	SteeringSprite(double x, double y);
 
@@ -44,6 +45,10 @@ public:
 	void arriveOff() { arrive = false; }
 	void wanderOn() { wander = true; }
 	void wanderOff() { wander = false; }
+
+	const Vector& getTarget() { return target; };
+	const Vector& getTestVec() { return testVec; }
+	double getAngle() { return angle; }
 
 	virtual ~SteeringSprite() 
 	{

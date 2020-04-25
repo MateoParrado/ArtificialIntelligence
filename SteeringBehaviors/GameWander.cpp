@@ -66,26 +66,26 @@ void GameWander::execute(SteeringManager* s)
 	sprite1->draw(s->renderer);
 	sprite1->update();
 
-	Vector rot = Vector::rotate_point(sprite->getPos(), sprite->getPos() + Vector(0, -100), sprite->angle);
+	Vector rot = Vector::rotate_point(sprite->getPos(), sprite->getPos() + Vector(0, -100), sprite->getAngle());
 
-	DrawCircle(s->renderer, rot.getX(), rot.getY(), 25);
+	DrawCircle(s->renderer, (int32_t)rot.getX(), (int32_t)rot.getY(), 25);
 
 	//target rect
 	SDL_Rect r;
-	r.x = (int)sprite->testVec.getX();
-	r.y = (int)sprite->testVec.getY();
+	r.x = (int)sprite->getTestVec().getX();
+	r.y = (int)sprite->getTestVec().getY();
 	r.h = 5;
 	r.w = 5;
 
 	SDL_RenderFillRect(s->renderer, &r);
 
-	rot = Vector::rotate_point(sprite1->getPos(), sprite1->getPos() + Vector(0, -100), sprite1->angle);
+	rot = Vector::rotate_point(sprite1->getPos(), sprite1->getPos() + Vector(0, -100), sprite1->getAngle());
 
-	DrawCircle(s->renderer, rot.getX(), rot.getY(), 25);
+	DrawCircle(s->renderer, (int32_t)rot.getX(), (int32_t)rot.getY(), 25);
 
 	//target rect
-	r.x = (int)sprite1->testVec.getX();
-	r.y = (int)sprite1->testVec.getY();
+	r.x = (int)sprite1->getTestVec().getX();
+	r.y = (int)sprite1->getTestVec().getY();
 	r.h = 5;
 	r.w = 5;
 

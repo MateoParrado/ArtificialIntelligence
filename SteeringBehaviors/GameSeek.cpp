@@ -24,8 +24,8 @@ void GameSeek::execute(SteeringManager* s)
 
 	//target rectangle
 	SDL_Rect r;
-	r.x = (int)sprite->target.getX();
-	r.y = (int)sprite->target.getY();
+	r.x = (int)sprite->getTarget().getX();
+	r.y = (int)sprite->getTarget().getY();
 	r.h = 5;
 	r.w = 5;
 

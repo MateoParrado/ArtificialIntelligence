@@ -76,12 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\SDLBasic;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\SDLBasic;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;C:\SDL\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDLBasic.lib;ArtificialIntelligence.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;C:\SDL\SDL2_ttf-2.0.15\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDLBasic.lib;ArtificialIntelligence.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -118,22 +118,24 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\SDLBasic;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\SDLBasic;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;C:\SDL\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDLBasic.lib;ArtificialIntelligence.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;C:\SDL\SDL2_ttf-2.0.15\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDLBasic.lib;ArtificialIntelligence.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameArrive.cpp" />
     <ClCompile Include="GameFlee.cpp" />
+    <ClCompile Include="GamePursuit.cpp" />
     <ClCompile Include="GameSeek.cpp" />
     <ClCompile Include="GameWander.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SmallSteeringSprite.cpp" />
     <ClCompile Include="Steering.cpp" />
     <ClCompile Include="SteeringManager.cpp" />
     <ClCompile Include="SteeringSprite.cpp" />
@@ -141,8 +143,10 @@
   <ItemGroup>
     <ClInclude Include="GameArrive.h" />
     <ClInclude Include="GameFlee.h" />
+    <ClInclude Include="GamePursuit.h" />
     <ClInclude Include="GameSeek.h" />
     <ClInclude Include="GameWander.h" />
+    <ClInclude Include="SmallSteeringSprite.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="SteeringManager.h" />
     <ClInclude Include="SteeringSprite.h" />

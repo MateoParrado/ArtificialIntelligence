@@ -12,10 +12,10 @@ protected:
 	Vector velocity;
 	Vector acceleration;
 
-public:
-
 	double angle;
 	double mass;
+public:
+
 
 	VehicleSprite(double x, double y, double mass) : Sprite(x, y), velocity(0, 0), acceleration(0, 0), mass(mass),
 													 angle(-M_PI/2)
