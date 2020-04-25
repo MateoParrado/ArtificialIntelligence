@@ -14,6 +14,7 @@
 
 
 #include <SDL.h> 
+#include <SDL_ttf.h>
 #include "SteeringSprite.h"
 #include "SteeringManager.h"
 #include "Definitions.h"
@@ -21,11 +22,25 @@
 #include "GameFlee.h"
 #include "GameArrive.h"
 #include "GameWander.h"
+#include "GamePursuit.h"
 
 #undef main
 
 //TODO
-//SET THE FRAMERATE AT 30 FPS SO I DONT NEED TO USE THESE RIDICULOUSLY SMALL NUMEBRS ANYMORE
+//MAKE A PURSUIT SCENE
+//MAKE FORCE AND MAX SPEED CHANGEABLE WITH THE KEYS
+//MAKE FORCE AND MAX SPEED CHANGE TO SOME DEFAULT VALUES EACH TIME YOU CHANGE SCENES
+//MAKE AN EVADE SCENE
+//CONGRATULATIONS, YOU HAVE FINISHED THE FIRST GROUP!!!
+//MAKE A MIXTURE SEEK / FLEE WHERE LEFT CLICK PLACES THE SEEK POINT AND RIGHT CLICK PLACES THE FLEE POINT
+//FIGURE OUT A BETTER WAY OF PASSING TARGET AND OTHER NECESSARY INFORMATION LIKE THAT, GETS UNRULY WITH MULTIPLE TARGETS AND NOT EVERYTHING USING THEM
+//MAKE A TEXT ENTITY (TODO ENTITY.H)
+//RENAME ARTIFICIAL INTELLIGENCE PROJECT (TODO ARTIFICIAL INTELLIGENCE MAIN)
+//IMPLEMENT VECTOR PERP
+//IMPLEMENT SET LOCAL ACCELERATION
+//MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
+//MAKE THE BOOLS LIKE SEEK ARRIVE AND WANDER INTO A BITWISE OR THING (TODO STEERING SPRITE.H)
+//HAVE A HELP GAME STATE BY PRESSING ZERO WHERE IT TELLS WHICH SCENES ARE IN WHICH BUTTONS
 
 int main()
 {
@@ -34,6 +49,19 @@ int main()
 		SDL_Window* window = NULL;
 		SDL_Renderer* renderer = NULL;
 
+		//TTF_Init();
+
+		//TTF_Font* arial = TTF_OpenFont("arial.ttf", 20);
+		//SDL_Color white = { 0, 0, 255, 255 };
+		//SDL_Surface* textSurface = TTF_RenderText_Solid(arial, "HELP PAGE", white);
+		//SDL_Texture* text = SDL_CreateTextureFromSurface(renderer, textSurface);
+		//SDL_Rect textRect;
+		//textRect.x = textRect.y = 0;
+
+		//SDL_QueryTexture(text, NULL, NULL, &textRect.w, &textRect.h);
+
+		//SDL_FreeSurface(textSurface);
+		//textSurface = nullptr;
 
 		if (SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer) == 0)
 		{
@@ -91,10 +119,14 @@ int main()
 						case SDLK_4:
 							m.changeState(GameWander::getInstance());
 							break;
+						case SDLK_5:
+							m.changeState(GamePursuit::getInstance());
+							break;
 						}
 					}
 				}
 
+				//SDL_RenderCopy(renderer, text, NULL, &textRect);
 				SDL_RenderPresent(renderer);
 
 				//to cap the framerate
@@ -113,6 +145,10 @@ int main()
 		{
 			SDL_DestroyWindow(window);
 		}
+		//if (text)
+		//{
+		//	SDL_DestroyTexture(text);
+		//}
 	}
 	SDL_Quit();
 	return 0;

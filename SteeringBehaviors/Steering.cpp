@@ -1,40 +1,41 @@
 #include "Steering.h"
 #include "Definitions.h"
+#include "SteeringSprite.h"
 #include <stdlib.h>
 
 //go from vector pos to vector target, overshooting it and them coming back
-Vector Steering::seek(Vector target, Vector pos, Vector vel)
+Vector Steering::seek()
 {
 	//get vector from pos to target
-	Vector temp = target - pos;
+	Vector temp = owner->target - owner->pos;
 
 	//make it the length of speed cap
 	temp.normalize();
 	temp *= SPEED_CAP;
 	
 	//add a force that decreases the faster we're going
-	return temp - vel;
+	return temp - owner->velocity;
 }
 
 //start and pos and go exactly away from target
-Vector Steering::flee(Vector target, Vector pos, Vector vel)
+Vector Steering::flee()
 {
 	//find vector from target to pos
-	Vector temp = pos - target;
+	Vector temp = owner->pos - owner->target;
 
 	//make teh vector the length of speed cal
 	temp.normalize();
 	temp *= SPEED_CAP;
 
 	//add a force that decreases the faster we're going
-	return temp - vel;
+	return temp - owner->velocity;
 }
 
 //go from pos to target and stop without overshooting
-Vector Steering::arrive(Vector target, Vector pos, Vector vel, double decelRate)
+Vector Steering::arrive(double decelRate)
 {
 	//get vector from pos to target
-	Vector temp = target - pos;
+	Vector temp = owner->target - owner->pos;
 
 	//find the distance squared between pos and target
 	double dist = temp.length();
@@ -51,7 +52,7 @@ Vector Steering::arrive(Vector target, Vector pos, Vector vel, double decelRate)
 		temp *= speed / dist;
 
 		//add a force that decreases the faster we're going
-		return temp - vel;
+		return temp - owner->velocity;
 	}
 
 	//if we're there then just return 0
@@ -59,24 +60,24 @@ Vector Steering::arrive(Vector target, Vector pos, Vector vel, double decelRate)
 }
 
 //generates ramdon seeming movement
-Vector Steering::wander(Vector& wanderTarget, Vector pos,double rad, double dist, double jitter, double angle, Vector* test)
+Vector Steering::wander(double rad, double dist, double jitter)
 {
 	//add small amount to target
-	wanderTarget += Vector((static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter,
+	owner->target += Vector((static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter,
 						   (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter);
 
 	//project it back on the unit circle
-	wanderTarget.normalize();
+	owner->target.normalize();
 
 	//multiply it by the desired radius
-	wanderTarget *= rad;
+	owner->target *= rad;
 
 	//offset it
-	Vector localTarget = wanderTarget + Vector(0, -dist) + pos;
+	Vector localTarget = owner->target + Vector(0, -dist) + owner->pos;
 
 	//put it in world coordinates
-	localTarget = Vector::rotate_point(pos, localTarget, angle);
-	*test = localTarget;
+	localTarget = Vector::rotate_point(owner->pos, localTarget, owner->angle);
+	(owner->testVec) = localTarget;
 
-	return localTarget - pos;
+	return localTarget - owner->pos;
 }

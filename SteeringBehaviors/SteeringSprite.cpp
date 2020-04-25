@@ -19,20 +19,20 @@ void SteeringSprite::update()
 	//check what behaviors are active and do them if they are
 	if (seek)
 	{
-		force += steer.seek(target, this->pos, this->velocity);
+		force += steer.seek();
 	}
 	if (flee)
 	{
-		force += steer.flee(target, this->pos, this->velocity);
+		force += steer.flee();
 	}
 	if (arrive)
 	{
 		//force += steer.arrive(target, Vector::rotate_point(pos, Vector(pos.getX(), pos.getY() - 20), angle), this->velocity, 1);
-		force += steer.arrive(target, this->pos, this->velocity, 1);
+		force += steer.arrive(1);
 	}
 	if (wander)
 	{
-		force += steer.wander(target, pos, 25, 100, 10, angle, &testVec);
+		force += steer.wander(25, 100, 10);
 	}
 
 	force.truncate(MAX_FORCE);

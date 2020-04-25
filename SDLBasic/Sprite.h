@@ -11,7 +11,7 @@ protected:
 	Vector pos;
 
 public:
-	Sprite(double x, double y) : Entity(""), pos(x, y)
+	Sprite(double x, double y) : Entity(), pos(x, y)
 	{
 
 
