@@ -80,11 +80,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;ArtificialIntelligence.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -122,13 +122,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL\SDL2-2.0.12\include;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence\ArtificialIntelligence;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDL\SDL2-2.0.12\lib\x64;C:\Users\parra\source\repos\ArtificialIntelligence\ArtificialIntelligence\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;ArtificialIntelligence.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

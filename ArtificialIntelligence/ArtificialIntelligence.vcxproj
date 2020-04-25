@@ -146,11 +146,13 @@
     <ClInclude Include="Fisherman.h" />
     <ClInclude Include="FishermanGlobalState.h" />
     <ClInclude Include="FishingState.h" />
+    <ClInclude Include="GamePursuit.h" />
     <ClInclude Include="MessageDispatcher.h" />
     <ClInclude Include="SellState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Telegram.h" />
+    <ClInclude Include="TextEntity.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WaitForFoodState.h" />
   </ItemGroup>
@@ -165,10 +167,12 @@
     <ClCompile Include="Fisherman.cpp" />
     <ClCompile Include="FishermanGlobalState.cpp" />
     <ClCompile Include="FishingState.cpp" />
+    <ClCompile Include="GamePursuit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MessageDispatcher.cpp" />
     <ClCompile Include="SellState.cpp" />
     <ClCompile Include="Telegram.cpp" />
+    <ClCompile Include="TextEntity.cpp" />
     <ClCompile Include="WaitForFoodState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

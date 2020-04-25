@@ -1,13 +1,13 @@
 #pragma once
 #include "Enums.h"
-#include "Entity.h"
+#include "TextEntity.h"
 #include "StateMachine.h"
 #include "State.h"
 #include <string>
 
 //Possible local states: eat, drink (blip state), fishing, sell, waitforfood (when waiting for a message from the chef)
 //Possible global states: fisherman global state
-class Fisherman : public Entity
+class Fisherman : public TextEntity
 {
 private:
 	Location location = MARKET;

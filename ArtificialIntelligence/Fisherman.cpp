@@ -3,7 +3,7 @@
 #include "FishermanGlobalState.h"
 #include "EntityManager.h"
  
-Fisherman::Fisherman(std::string s) : Entity(s)
+Fisherman::Fisherman(std::string s) : TextEntity(s)
 {
 	stateMach = new StateMachine<Fisherman>(this);
 	stateMach->setCurrState(Fish);
