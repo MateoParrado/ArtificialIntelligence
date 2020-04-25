@@ -16,9 +16,11 @@ private:
 	Steering steer = Steering(this);
 
 	//note that more than one of these can be active at once
-	bool seek, flee, arrive, wander;
+	bool seek, flee, arrive, wander, pursuit;
 	
 	Vector target, testVec;
+
+	SteeringSprite* targetSprite;
 public:
 	friend class Steering;
 
@@ -45,6 +47,11 @@ public:
 	void arriveOff() { arrive = false; }
 	void wanderOn() { wander = true; }
 	void wanderOff() { wander = false; }
+	void pursuitOn(SteeringSprite* s) { 
+		targetSprite = s;
+		pursuit = true;
+	}
+	void pursuitOff() { pursuit = false; }
 
 	const Vector& getTarget() { return target; };
 	const Vector& getTestVec() { return testVec; }

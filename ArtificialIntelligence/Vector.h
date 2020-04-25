@@ -54,6 +54,21 @@ public:
 		y /= temp;
 	}
 
+	//returns the heading vector ( a unit vector parallel to this one)
+	Vector heading() const
+	{
+		if (!x && !y)
+		{
+			return Vector::Zero();
+		}
+
+		Vector ret(*this);
+
+		ret.normalize();
+
+		return ret;
+	}
+
 	double dot(const Vector& vec) const
 	{
 		return x * vec.x + y * vec.y;

@@ -59,6 +59,9 @@ Vector Steering::arrive(double decelRate)
 	return Vector::Zero();
 }
 
+//weird warning, ignore it
+#pragma warning ( disable: 26451)
+
 //generates ramdon seeming movement
 Vector Steering::wander(double rad, double dist, double jitter)
 {
@@ -80,4 +83,35 @@ Vector Steering::wander(double rad, double dist, double jitter)
 	(owner->testVec) = localTarget;
 
 	return localTarget - owner->pos;
+}
+
+Vector Steering::pursuit(const SteeringSprite* s)
+{
+	//if we aren't moving then start moving so we have a real heading
+	if (!owner->velocity.lengthSq())
+	{
+		owner->target = s->pos;
+		return seek();
+	}
+
+	//first find the vector from us to the other sprite
+	Vector toSprite = s->pos - owner->pos;
+
+	//find the angle between us and them
+	double relativeHeading = (owner->velocity).heading().dot((s->velocity).heading());
+
+	//if we are looking at them then just seek at them
+	if (toSprite.dot((owner->velocity).heading()) > 0 && //are we facing the right direction
+		relativeHeading < -0.95) //are we within 18 degrees of them
+	{
+		owner->target = s->pos;
+		return seek();
+	}
+
+	//the greater the distance the greater the look ahead time, and the greater the velocities the less the lookahead time
+	double lookAheadTime = toSprite.length() / ((owner->velocity).length() + (s->velocity).length());
+
+	owner->target = s->pos + s->velocity * lookAheadTime;
+
+	return seek();
 }

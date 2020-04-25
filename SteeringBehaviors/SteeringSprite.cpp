@@ -6,7 +6,7 @@
 SteeringSprite::SteeringSprite(double x, double y) : SimpleSprite(x, y)
 {
 	//initialize to be doing nothing
-	seek = flee = arrive = wander = false;
+	seek = flee = arrive = wander = pursuit = false;
 
 	target = Vector(300, 300);
 	EntityMgr->registerEntity(this);
@@ -33,6 +33,10 @@ void SteeringSprite::update()
 	if (wander)
 	{
 		force += steer.wander(25, 100, 10);
+	}
+	if (pursuit)
+	{
+		force += steer.pursuit(targetSprite);
 	}
 
 	force.truncate(MAX_FORCE);

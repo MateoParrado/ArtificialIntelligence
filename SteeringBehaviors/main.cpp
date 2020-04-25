@@ -12,6 +12,24 @@
 //																	   //
 /////////////////////////////////////////////////////////////////////////
 
+/////////////////////KEY CONTROLS///////////////////////////////////////
+//
+// 1- SEEK (change target with left click)
+//
+// 2- FLEE (change target with left click)
+//
+// 3- ARRIVE (change target with left click)
+//
+// 4- WANDER
+//
+// 5- PURSUIT
+//
+// 6- EVADE (NOT DONE)
+//
+// 7- FLEE / SEEK MIXTURE (change seek target with left click, flee target with right click)
+//
+////////////////////////////////////////////////////////////////////////
+
 
 #include <SDL.h> 
 #include <SDL_ttf.h>
@@ -27,13 +45,16 @@
 #undef main
 
 //TODO
-//MAKE A PURSUIT SCENE
 //MAKE FORCE AND MAX SPEED CHANGEABLE WITH THE KEYS
 //MAKE FORCE AND MAX SPEED CHANGE TO SOME DEFAULT VALUES EACH TIME YOU CHANGE SCENES
 //MAKE AN EVADE SCENE
 //CONGRATULATIONS, YOU HAVE FINISHED THE FIRST GROUP!!!
 //MAKE A MIXTURE SEEK / FLEE WHERE LEFT CLICK PLACES THE SEEK POINT AND RIGHT CLICK PLACES THE FLEE POINT
 //FIGURE OUT A BETTER WAY OF PASSING TARGET AND OTHER NECESSARY INFORMATION LIKE THAT, GETS UNRULY WITH MULTIPLE TARGETS AND NOT EVERYTHING USING THEM
+	//IDEA: MAKE SEEK ON / OFF TAKE IN A TARGET AND THEN EACH ONE OF THE THINGS HAS THEIR OWN ON PARAMETERS AND LOCAL VARIABLES TO USE AND PASS INTO THE FUNCTIONS
+	//functions then need to take in a target parameter
+	//have setter funcitons like set seek target 
+	//then we need safety nullptr checks (maybe)
 //MAKE A TEXT ENTITY (TODO ENTITY.H)
 //RENAME ARTIFICIAL INTELLIGENCE PROJECT (TODO ARTIFICIAL INTELLIGENCE MAIN)
 //IMPLEMENT VECTOR PERP
@@ -41,6 +62,8 @@
 //MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
 //MAKE THE BOOLS LIKE SEEK ARRIVE AND WANDER INTO A BITWISE OR THING (TODO STEERING SPRITE.H)
 //HAVE A HELP GAME STATE BY PRESSING ZERO WHERE IT TELLS WHICH SCENES ARE IN WHICH BUTTONS
+//ALLOW SPRITES TO EACH HAVE THEIR OWN MAX SPEED
+
 
 int main()
 {

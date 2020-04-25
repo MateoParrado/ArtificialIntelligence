@@ -6,7 +6,7 @@ void GamePursuit::enter(SteeringManager* s)
 {
 	sprite = new SteeringSprite(200, 200);
 	miniSprite = new SmallSteeringSprite(300, 300);
-	sprite->wanderOn();
+	sprite->pursuitOn(miniSprite);
 	miniSprite->wanderOn();
 }
 

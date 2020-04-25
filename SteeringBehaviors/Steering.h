@@ -29,5 +29,7 @@ public:
 	//test vec is unneccessary, but used to display the target point in the graphics
 	Vector wander(double rad, double dist, double jitter);
 
+	//try and reach the target enemy by predicting their position and seeking towards it
+	Vector pursuit(const SteeringSprite* s);
 };
 
