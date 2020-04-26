@@ -41,6 +41,7 @@
 #include "GameArrive.h"
 #include "GameWander.h"
 #include "GamePursuit.h"
+#include "GameEvade.h"
 
 #undef main
 
@@ -138,6 +139,9 @@ int main()
 							break;
 						case SDLK_5:
 							m.changeState(GamePursuit::getInstance());
+							break;
+						case SDLK_6:
+							m.changeState(GameEvade::getInstance());
 							break;
 						}
 					}

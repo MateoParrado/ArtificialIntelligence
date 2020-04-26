@@ -15,7 +15,7 @@ private:
 	Steering steer = Steering(this);
 
 	Vector seekTarget, arriveTarget, fleeTarget, wanderTarget;
-	SteeringSprite* pursuitTarget;
+	SteeringSprite* pursuitTarget, *evadeTarget;
 
 	//used to store the boolean combination of steering behaviors that are enabled / disabled
 	uint32_t enabledBehaviors;
@@ -49,6 +49,7 @@ public:
 	void setArriveTarget(const Vector& t) { arriveTarget = t; }
 	void setWanderTarget(const Vector& t) { wanderTarget = t; }
 	void setPursuitTarget(SteeringSprite* t) { pursuitTarget = t; }
+	void setEvadeTarget(SteeringSprite* t) { evadeTarget = t; }
 
 	//target getters
 	const Vector& getSeekTarget() const { return seekTarget; };

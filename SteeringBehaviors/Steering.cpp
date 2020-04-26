@@ -110,3 +110,23 @@ Vector Steering::pursuit(const SteeringSprite* s)
 
 	return seek(s->pos + s->velocity * lookAheadTime);
 }
+
+Vector Steering::evade(const SteeringSprite* s)
+{
+	//if we aren't moving then start moving so we have a real heading
+	if (!owner->velocity.lengthSq())
+	{
+		return flee(s->pos);
+	}
+
+	//first find the vector from us to the other sprite
+	Vector toSprite = s->pos - owner->pos;
+
+	//find the angle between us and them
+	double relativeHeading = (owner->velocity).heading().dot((s->velocity).heading());
+
+	//the greater the distance the greater the look ahead time, and the greater the velocities the less the lookahead time
+	double lookAheadTime = toSprite.length() / ((owner->velocity).length() + (s->velocity).length());
+
+	return flee(s->pos + s->velocity * lookAheadTime);
+}

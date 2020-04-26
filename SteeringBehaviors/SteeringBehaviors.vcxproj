@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameArrive.cpp" />
+    <ClCompile Include="GameEvade.cpp" />
     <ClCompile Include="GameFlee.cpp" />
     <ClCompile Include="GamePursuit.cpp" />
     <ClCompile Include="GameSeek.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameArrive.h" />
+    <ClInclude Include="GameEvade.h" />
     <ClInclude Include="GameFlee.h" />
     <ClInclude Include="GamePursuit.h" />
     <ClInclude Include="GameSeek.h" />

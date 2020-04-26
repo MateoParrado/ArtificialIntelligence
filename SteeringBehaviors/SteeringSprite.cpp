@@ -34,6 +34,10 @@ void SteeringSprite::update()
 	{
 		force += steer.pursuit(pursuitTarget);
 	}
+	if (enabledBehaviors & EVADE)
+	{
+		force += steer.evade(evadeTarget);
+	}
 
 	force.truncate(MAX_FORCE);
 

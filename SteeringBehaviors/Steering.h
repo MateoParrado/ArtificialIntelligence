@@ -31,5 +31,8 @@ public:
 
 	//try and reach the target enemy by predicting their position and seeking towards it
 	Vector pursuit(const SteeringSprite* s);
+
+	//same as pursuit but with fleeing away from that point
+	Vector evade(const SteeringSprite* s);
 };
 
