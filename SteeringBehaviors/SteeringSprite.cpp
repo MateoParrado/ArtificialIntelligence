@@ -39,9 +39,14 @@ void SteeringSprite::update()
 		force += steer.evade(evadeTarget);
 	}
 
+	//make sure we don't get too big forces
 	force.truncate(MAX_FORCE);
 
-	acceleration = force / mass;
+	//or too small forces
+	if (force.length() > MIN_FORCE)
+		acceleration = force / mass;
+	else
+		acceleration = Vector::Zero();
 
 	SimpleSprite::update();
 }

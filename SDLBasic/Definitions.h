@@ -5,8 +5,9 @@
 //cap the speed of a moving entity
 #define SPEED_CAP 5
 
-//the maximum force applied to an entity
-#define MAX_FORCE 01
+//the maximum and minimum force applied to an entity
+#define MAX_FORCE 0.1
+#define MIN_FORCE 0.001
 
 //width and height of windows
 #define WINDOW_WIDTH 600

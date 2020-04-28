@@ -24,7 +24,7 @@
 //
 // 5- PURSUIT
 //
-// 6- EVADE (NOT DONE)
+// 6- EVADE
 //
 // 7- FLEE / SEEK MIXTURE (change seek target with left click, flee target with right click)
 //
@@ -42,22 +42,21 @@
 #include "GameWander.h"
 #include "GamePursuit.h"
 #include "GameEvade.h"
+#include "GameSeekAndFlee.h"
 
 #undef main
 
 //TODO
 //MAKE FORCE AND MAX SPEED CHANGEABLE WITH THE KEYS
-//MAKE FORCE AND MAX SPEED CHANGE TO SOME DEFAULT VALUES EACH TIME YOU CHANGE SCENES
-//MAKE AN EVADE SCENE
-//CONGRATULATIONS, YOU HAVE FINISHED THE FIRST GROUP!!!
-//MAKE A MIXTURE SEEK / FLEE WHERE LEFT CLICK PLACES THE SEEK POINT AND RIGHT CLICK PLACES THE FLEE POINT
 //IMPLEMENT VECTOR PERP
 //IMPLEMENT SET LOCAL ACCELERATION
 //MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
 //HAVE A HELP GAME STATE BY PRESSING ZERO WHERE IT TELLS WHICH SCENES ARE IN WHICH BUTTONS
-//ALLOW SPRITES TO EACH HAVE THEIR OWN MAX SPEED
+//ALLOW SPRITES TO EACH HAVE THEIR OWN MAX SPEED / FORCE
+//MAKE EACH SCENE HAVE AN ORIGINAL AND DIFFERENT MAX FORCE / SPEED FOR EACH SPRITE
 //MAKE ALL TARGETS IN STEERING SPRITE STD::VECTORS SO THEY CAN HAVE A BUNCH OF THEM
 //MAKE SCENE WHERE YOU CLICK TO PLACE A FLEE TARGET BUT IT ONLY FLEES IF ITS WITHIN A CERTAIN DISTANCE AND YOU CAN PLACE A BUNCH
+//FIX PROBLEM WHERE VEHICLES SPASM IN SOME CASES (LIKE IN NUMBER 7), TRY DOING THIS BY HAVING A MAXIMUM ANGLE TO VELOCITY RATIO
 
 
 int main()
@@ -119,6 +118,14 @@ int main()
 							GameFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
 						if (GameArrive::getInstance()->sprite)
 							GameArrive::getInstance()->sprite->setArriveTarget(Vector(event.button.x, event.button.y));
+						if (GameSeekAndFlee::getInstance()->sprite)
+						{
+							if(event.button.button == SDL_BUTTON_LEFT)
+								GameSeekAndFlee::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
+							else if (event.button.button == SDL_BUTTON_RIGHT)
+								GameSeekAndFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
+
+						}
 					}
 					else if (event.type == SDL_KEYDOWN)
 					{
@@ -142,6 +149,9 @@ int main()
 							break;
 						case SDLK_6:
 							m.changeState(GameEvade::getInstance());
+							break;
+						case SDLK_7:
+							m.changeState(GameSeekAndFlee::getInstance());
 							break;
 						}
 					}
