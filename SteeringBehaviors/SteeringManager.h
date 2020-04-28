@@ -30,6 +30,11 @@ public:
 		stateMach->revertState();
 	}
 
+	bool isInState(const State<SteeringManager>* s)
+	{
+		return stateMach->isInState(s);
+	}
+
 	~SteeringManager()
 	{
 		delete stateMach;

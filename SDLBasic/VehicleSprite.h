@@ -47,24 +47,24 @@ public:
 
 	void setLocalVelocity(double xv, double yv)
 	{
-		velocity += Vector::rotate_point(Vector::Zero(), Vector(xv, yv), angle - M_PI / 2);
+		velocity = Vector::rotate_point(Vector::Zero(), Vector(xv, yv), angle - M_PI / 2);
 	}
 
 	void setLocalVelocity(const Vector& vec)
 	{
-		velocity += Vector::rotate_point(Vector::Zero(), vec, angle - M_PI / 2);
+		velocity = Vector::rotate_point(Vector::Zero(), vec, angle - M_PI / 2);
 	}
 
-	//void setLocalAcceleration(double xv, double yv)
-	//{
-	//	localAcceleration = Vector(xv, yv);
-	//}
+	void setLocalAcceleration(double xv, double yv)
+	{
+		acceleration = Vector::rotate_point(Vector::Zero(), Vector(xv, yv), angle - M_PI / 2);
+	}
 
-	//void setLocalAcceleration(const Vector& vec)
-	//{
-	//	localAcceleration = vec;
-	//}
-
+	void setLocalAcceleration(const Vector& vec)
+	{
+		acceleration = Vector::rotate_point(Vector::Zero(), vec, angle - M_PI / 2);
+	}
+	
 	void applyForce(Vector force)
 	{
 		acceleration += (force /= mass);

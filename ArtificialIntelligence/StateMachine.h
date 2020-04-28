@@ -76,8 +76,8 @@ public:
 	State<T>* previousState() const { return prevState; }
 
 	//returns true if we are currently in state s
-	bool isInState(const State<T>& s) const
+	bool isInState(const State<T>* s) const
 	{
-		return s.currentState() == this->currentState();
+		return s == this->currentState();
 	}
 };

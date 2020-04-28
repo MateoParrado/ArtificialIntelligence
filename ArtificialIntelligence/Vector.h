@@ -84,11 +84,10 @@ public:
 	return 1; //clockwise
 	}
 
-	//TODO IMPLEMENT THIS
 	//gets the perpendicular vector
 	Vector perp() const
 	{
-
+		return Vector(y, -x);
 	}
 
 	//limit the length to max

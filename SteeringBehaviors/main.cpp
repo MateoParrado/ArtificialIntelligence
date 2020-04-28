@@ -47,15 +47,10 @@
 #undef main
 
 //TODO
-//MAKE FORCE AND MAX SPEED CHANGEABLE WITH THE KEYS
-//IMPLEMENT VECTOR PERP
-//IMPLEMENT SET LOCAL ACCELERATION
+//OBSTACLE AVOIDANCE
+//WALL AVOIDANCE
 //MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
-//HAVE A HELP GAME STATE BY PRESSING ZERO WHERE IT TELLS WHICH SCENES ARE IN WHICH BUTTONS
-//ALLOW SPRITES TO EACH HAVE THEIR OWN MAX SPEED / FORCE
-//MAKE EACH SCENE HAVE AN ORIGINAL AND DIFFERENT MAX FORCE / SPEED FOR EACH SPRITE
-//MAKE ALL TARGETS IN STEERING SPRITE STD::VECTORS SO THEY CAN HAVE A BUNCH OF THEM
-//MAKE SCENE WHERE YOU CLICK TO PLACE A FLEE TARGET BUT IT ONLY FLEES IF ITS WITHIN A CERTAIN DISTANCE AND YOU CAN PLACE A BUNCH
+//MAKE EACH SCENE HAVE AN ORIGINAL AND DIFFERENT MAX FORCE / SPEED FOR SPRITES
 //FIX PROBLEM WHERE VEHICLES SPASM IN SOME CASES (LIKE IN NUMBER 7), TRY DOING THIS BY HAVING A MAXIMUM ANGLE TO VELOCITY RATIO
 
 
@@ -111,14 +106,14 @@ int main()
 					}
 					else if (event.type == SDL_MOUSEBUTTONDOWN)
 					{
-						//set the target for all of the game states sprites, but only if they've been initialized
-						if(GameSeek::getInstance()->sprite)
-							GameSeek::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
-						if(GameFlee::getInstance()->sprite)
+						//set the target for all of the game states sprites if we're in that instance
+						if(m.isInState(GameSeek::getInstance()))
+						   GameSeek::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
+						if (m.isInState(GameFlee::getInstance()))
 							GameFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
-						if (GameArrive::getInstance()->sprite)
+						if (m.isInState(GameArrive::getInstance()))
 							GameArrive::getInstance()->sprite->setArriveTarget(Vector(event.button.x, event.button.y));
-						if (GameSeekAndFlee::getInstance()->sprite)
+						if (m.isInState(GameSeekAndFlee::getInstance()))
 						{
 							if(event.button.button == SDL_BUTTON_LEFT)
 								GameSeekAndFlee::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
