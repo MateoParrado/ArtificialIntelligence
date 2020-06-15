@@ -1,5 +1,6 @@
 #include "SteeringSprite.h"
 #include "EntityManager.h"
+#include "GameObstacleAvoidance.h"
 
 SteeringSprite::SteeringSprite(double x, double y) : SimpleSprite(x, y)
 {
@@ -38,6 +39,10 @@ void SteeringSprite::update()
 	{
 		force += steer.evade(evadeTarget);
 	}
+	if (enabledBehaviors & WANDER_OBS_AVOID)
+	{
+		force += steer.wanderObsAvoid(&wanderTarget, 25, 100, 10, GameObstacleAvoidance::getInstance()->obs);
+	}
 
 	//make sure we don't get too big forces
 	force.truncate(MAX_FORCE);
@@ -49,4 +54,5 @@ void SteeringSprite::update()
 		acceleration = Vector::Zero();
 
 	SimpleSprite::update();
+
 }

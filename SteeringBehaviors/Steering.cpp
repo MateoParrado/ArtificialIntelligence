@@ -1,7 +1,14 @@
 #include "Steering.h"
 #include "Definitions.h"
 #include "SteeringSprite.h"
+#include "Obstacle.h"
 #include <stdlib.h>
+#include <vector>
+
+//used for debugging obstacle avoidance, should be deleted
+#include <iostream>
+#include<Windows.h>
+using namespace std;
 
 //go from vector pos to vector target, overshooting it and them coming back
 Vector Steering::seek(const Vector& target)
@@ -12,7 +19,7 @@ Vector Steering::seek(const Vector& target)
 	//make it the length of speed cap
 	temp.normalize();
 	temp *= SPEED_CAP;
-	
+
 	//add a force that decreases the faster we're going
 	return temp - owner->velocity;
 }
@@ -67,7 +74,7 @@ Vector Steering::wander(Vector* target, double rad, double dist, double jitter)
 {
 	//add small amount to target
 	*target += Vector((static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter,
-						   (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter);
+		(static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter);
 
 	//project it back on the unit circle
 	target->normalize();
@@ -82,6 +89,97 @@ Vector Steering::wander(Vector* target, double rad, double dist, double jitter)
 	localTarget = Vector::rotate_point(owner->pos, localTarget, owner->angle);
 
 	return localTarget - owner->pos;
+}
+
+Vector Steering::wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray)
+{
+	//get the length of teh box we are using to check for collisions
+	double boxLength = MIN_BOX_LENGTH + (owner->getVelocity().length() / SPEED_CAP) * MIN_BOX_LENGTH;
+
+	//filter out any obstacles too far away to collide with the box (as well as doing all our other filtering steps for efficiency)
+	std::vector<Obstacle> obs;
+	for (int i = 0; i < obsArray.size(); i++)
+	{
+		if (owner->pos.distance(obsArray[i].pos) < boxLength + obsArray[i].r)
+		{
+
+			//convert the obstacles to local coordinates
+			Obstacle o;
+			o.r = obsArray[i].r;
+			o.pos = owner->pos.worldToLocal(obsArray[i].pos, owner->angle);
+
+			//only keep the obstacles if their local y is positive
+			if (o.pos.getY() <= 0)
+			{
+				continue;
+			}
+
+			//if the local position is negative, check if when we add the radius and half the box width is it positive
+			//if it is then we consider it
+			//15 is half the bounding box
+			if (o.pos.getX() <= 0 && o.pos.getX() + o.r + 15 >= 0)
+				obs.push_back(o);
+
+			//same thing for other sign
+			else if (o.pos.getX() >= 0 && o.pos.getX() - o.r - 15 <= 0)
+				obs.push_back(o);
+
+		}
+	}
+
+	if (obs.size() > 0)
+	{
+
+		double closestDist = 10000000;
+		int closestIndex = -1;
+
+		//we will now find the intersection point of of the line and our current trajectory
+		//we know the x coordinate will be zero, so we can solve the equation (x-c_x)^2+(y-c_y)^2=r^2 with x = 0
+		//obs[i].pos.getX()^2+(y-obs[i].pos.getY())^2 = (obs[i].r+15)^2
+		//y-obs[i].pos.getY() = sqrt((obs[i].r+15)^2 - obs[i].pos.getX()^2)
+		//y = sqrt((obs[i].r+15)^2 - obs[i].pos.getX()^2) + obs[i].pos.getY()
+		
+		for (int i = 0; i < obs.size(); i++)
+		{
+			double temp = sqrt((obs[i].r + 15)* (obs[i].r + 15) - obs[i].pos.getX() * obs[i].pos.getX()); //only calculate sqrt once
+			double first = temp + obs[i].pos.getY();
+			double second = -temp + obs[i].pos.getY();
+
+			double absolute = 0;
+
+			//if either are less than zero do the other one, else choose the min
+			if (first < 0)
+				absolute = second;
+			else if (second < 0)
+				absolute = first;
+			else
+				absolute = first < second ? first : second;
+
+			if (absolute < closestDist)
+			{
+				closestDist = absolute;
+				closestIndex = i;
+			}
+		}
+
+		//calculate steering force based on closest dist
+
+		//the closer the obstacle the stronger the steering force
+		double mult = 1.0 + ((boxLength - obs[closestIndex].pos.getX()) / boxLength);
+		mult /= 100;
+
+		Vector force = Vector::Zero();
+
+		force.setX((obs[closestIndex].r - obs[closestIndex].pos.getX()) * mult);
+
+		//this is the braking force, also proportional to dist
+		force.setY((obs[closestIndex].r - obs[closestIndex].pos.getY()) * 0.02);
+
+		return Vector::Zero().localToWorld(force, owner->angle);
+	}
+
+	return wander(target, rad, dist, jitter);
+	//return Vector(1, 0);
 }
 
 Vector Steering::pursuit(const SteeringSprite* s)

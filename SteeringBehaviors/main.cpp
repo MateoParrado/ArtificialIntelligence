@@ -43,6 +43,7 @@
 #include "GamePursuit.h"
 #include "GameEvade.h"
 #include "GameSeekAndFlee.h"
+#include "GameObstacleAvoidance.h"
 
 #undef main
 
@@ -85,6 +86,10 @@ int main()
 			//we use this to store the first tick of each frame
 			Uint32 startingTick;
 
+				SteeringSprite s(200, 200);
+				s.setVelocity(0, 1);
+
+
 			while (!done)
 			{
 				//get milliseconds since program start
@@ -97,7 +102,6 @@ int main()
 
 				//update and draw current game state
 				m.update();
-
 				while (SDL_PollEvent(&event))
 				{
 					if (event.type == SDL_QUIT)
@@ -147,6 +151,9 @@ int main()
 							break;
 						case SDLK_7:
 							m.changeState(GameSeekAndFlee::getInstance());
+							break;
+						case SDLK_8:
+							m.changeState(GameObstacleAvoidance::getInstance());
 							break;
 						}
 					}

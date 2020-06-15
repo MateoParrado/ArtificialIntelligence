@@ -205,4 +205,20 @@ public:
 		point.y = ynew + center.y;
 		return point;
 	}
+
+	//convert another vector to the local coordinates relative to this one (includes angle for heading of entity)
+	Vector worldToLocal (const Vector& other, double angle) const
+	{
+		Vector relative = Vector(other.x, -other.y) - Vector(this->x, -this->y);
+
+		return rotate_point(Vector::Zero(), relative, angle);
+	}
+
+	Vector localToWorld(const Vector& other, double angle) const
+	{
+		Vector relative = rotate_point(Vector::Zero(), other, -angle);
+		relative += Vector(this->x, -this->y);
+
+		return Vector(relative.x, -relative.y);
+	}
 };

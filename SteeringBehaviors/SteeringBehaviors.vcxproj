@@ -132,11 +132,13 @@
     <ClCompile Include="GameArrive.cpp" />
     <ClCompile Include="GameEvade.cpp" />
     <ClCompile Include="GameFlee.cpp" />
+    <ClCompile Include="GameObstacleAvoidance.cpp" />
     <ClCompile Include="GamePursuit.cpp" />
     <ClCompile Include="GameSeek.cpp" />
     <ClCompile Include="GameSeekAndFlee.cpp" />
     <ClCompile Include="GameWander.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="SmallSteeringSprite.cpp" />
     <ClCompile Include="Steering.cpp" />
     <ClCompile Include="SteeringManager.cpp" />
@@ -146,10 +148,12 @@
     <ClInclude Include="GameArrive.h" />
     <ClInclude Include="GameEvade.h" />
     <ClInclude Include="GameFlee.h" />
+    <ClInclude Include="GameObstacleAvoidance.h" />
     <ClInclude Include="GamePursuit.h" />
     <ClInclude Include="GameSeek.h" />
     <ClInclude Include="GameSeekAndFlee.h" />
     <ClInclude Include="GameWander.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="SmallSteeringSprite.h" />
     <ClInclude Include="Steering.h" />
     <ClInclude Include="SteeringManager.h" />

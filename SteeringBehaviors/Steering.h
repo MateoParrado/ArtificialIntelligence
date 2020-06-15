@@ -1,5 +1,7 @@
 #pragma once
 #include "Vector.h"
+#include <vector>
+#include "Obstacle.h"
 
 class SteeringSprite;
 
@@ -26,8 +28,10 @@ public:
 	//rad is the radius of the wander circle
 	//dist is the distance from the wander circle to the entity
 	//jitter is the speed at which the target position changes
-	//test vec is unneccessary, but used to display the target point in the graphics
 	Vector wander(Vector* target, double rad, double dist, double jitter);
+
+	//same as above but also avoids any obstacle in the obs avoid array
+	Vector wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray);
 
 	//try and reach the target enemy by predicting their position and seeking towards it
 	Vector pursuit(const SteeringSprite* s);
