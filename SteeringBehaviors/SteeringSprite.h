@@ -23,7 +23,7 @@ private:
 public:
 	friend class Steering;
 
-	SteeringSprite(double x, double y);
+	SteeringSprite(double x, double y, double minForce, double maxForce, double maxSpeed);
 
 	virtual void update();
 

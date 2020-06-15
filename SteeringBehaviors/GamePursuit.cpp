@@ -4,8 +4,8 @@ GamePursuit* GamePursuit::instance = nullptr;
 
 void GamePursuit::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
-	miniSprite = new SmallSteeringSprite(300, 300);
+	sprite = new SteeringSprite(200, 200, 0.01, 0.4, 6);
+	miniSprite = new SmallSteeringSprite(300, 300, 0.01, 0.8, 10);
 	sprite->enableBehaviors(PURSUE);
 	sprite->setPursuitTarget(miniSprite);
 

@@ -4,8 +4,8 @@ GameObstacleAvoidance* GameObstacleAvoidance::instance = nullptr;
 
 void GameObstacleAvoidance::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(300, 100); // try 200, 200 if you want to break it
-	sprite1 = new SteeringSprite(300, 300);
+	sprite = new SteeringSprite(300, 100, 0.01, 1, 5); // try 200, 200 if you want to break it
+	sprite1 = new SteeringSprite(300, 300, 0.01, 1, 5);
 	sprite->enableBehaviors(WANDER_OBS_AVOID);
 	sprite1->enableBehaviors(WANDER_OBS_AVOID);
 
@@ -49,7 +49,7 @@ void GameObstacleAvoidance::execute(SteeringManager* s)
 	sprite->draw(s->renderer);
 	sprite->update();
 
-	double boxLength = MIN_BOX_LENGTH + (sprite->getVelocity().length() / SPEED_CAP) * MIN_BOX_LENGTH;
+	double boxLength = MIN_BOX_LENGTH + (sprite->getVelocity().length() / sprite->maxSpeed) * MIN_BOX_LENGTH;
 
 	Vector c1 = Vector::rotate_point(sprite->getPos(), Vector(sprite->getPos().getX() + 15, sprite->getPos().getY()), sprite->getAngle());
 	Vector c2 = Vector::rotate_point(sprite->getPos(), Vector(sprite->getPos().getX() - 15, sprite->getPos().getY()), sprite->getAngle());
@@ -64,7 +64,7 @@ void GameObstacleAvoidance::execute(SteeringManager* s)
 	sprite1->draw(s->renderer);
 	sprite1->update();
 
-	boxLength = MIN_BOX_LENGTH + (sprite1->getVelocity().length() / SPEED_CAP) * MIN_BOX_LENGTH;
+	boxLength = MIN_BOX_LENGTH + (sprite1->getVelocity().length() / sprite1->maxSpeed) * MIN_BOX_LENGTH;
 
 	c1 = Vector::rotate_point(sprite1->getPos(), Vector(sprite1->getPos().getX() + 15, sprite1->getPos().getY()), sprite1->getAngle());
 	c2 = Vector::rotate_point(sprite1->getPos(), Vector(sprite1->getPos().getX() - 15, sprite1->getPos().getY()), sprite1->getAngle());

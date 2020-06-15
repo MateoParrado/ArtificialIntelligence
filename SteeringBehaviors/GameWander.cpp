@@ -4,8 +4,8 @@ GameWander* GameWander::instance = nullptr;
 
 void GameWander::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
-	sprite1 = new SteeringSprite(300, 300);
+	sprite = new SteeringSprite(200, 20, 0.01, 1, 5);
+	sprite1 = new SteeringSprite(300, 300, 0.01, 1, 5);
 	sprite->enableBehaviors(WANDER);
 	sprite1->enableBehaviors(WANDER);
 }

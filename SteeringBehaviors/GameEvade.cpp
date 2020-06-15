@@ -4,8 +4,8 @@ GameEvade* GameEvade::instance = nullptr;
 
 void GameEvade::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
-	miniSprite = new SmallSteeringSprite(300, 300);
+	sprite = new SteeringSprite(200, 200, 0.01, 0.4, 8);
+	miniSprite = new SmallSteeringSprite(300, 300, 0.01, 0.1, 10);
 	sprite->enableBehaviors(WANDER);
 
 	miniSprite->enableBehaviors(EVADE);

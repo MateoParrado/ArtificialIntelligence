@@ -14,10 +14,13 @@ protected:
 
 	double angle;
 	double mass;
+
 public:
+	const double maxForce, minForce, maxSpeed;
 
 
-	VehicleSprite(double x, double y, double mass) : Sprite(x, y), velocity(0, 0), acceleration(0, 0), mass(mass),
+	VehicleSprite(double x, double y, double mass, double minForce, double maxForce, double maxSpeed) : 
+		Sprite(x, y), velocity(0, 0), acceleration(0, 0), mass(mass), maxForce(maxForce), minForce(minForce), maxSpeed(maxSpeed),
 													 angle(-M_PI/2)
 	{
 

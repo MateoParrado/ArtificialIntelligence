@@ -86,7 +86,7 @@ int main()
 			//we use this to store the first tick of each frame
 			Uint32 startingTick;
 
-				SteeringSprite s(200, 200);
+				SteeringSprite s(200, 200, 0.01, 1, 5);
 				s.setVelocity(0, 1);
 
 

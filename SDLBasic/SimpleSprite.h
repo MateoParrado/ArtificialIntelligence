@@ -6,7 +6,7 @@ class SimpleSprite :
 	public VehicleSprite
 {
 public:
-	SimpleSprite(double x, double y) : VehicleSprite(x, y, 1)
+	SimpleSprite(double x, double y, double minForce, double maxForce, double maxSpeed) : VehicleSprite(x, y, 1, minForce, maxForce, maxSpeed)
 	{
 
 	}

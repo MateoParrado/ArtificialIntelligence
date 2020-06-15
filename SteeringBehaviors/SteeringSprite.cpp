@@ -2,7 +2,7 @@
 #include "EntityManager.h"
 #include "GameObstacleAvoidance.h"
 
-SteeringSprite::SteeringSprite(double x, double y) : SimpleSprite(x, y)
+SteeringSprite::SteeringSprite(double x, double y, double minForce, double maxForce, double maxSpeed) : SimpleSprite(x, y, minForce, maxForce, maxSpeed)
 {
 	//initialize to be doing nothing
 	enabledBehaviors = 0;
@@ -45,10 +45,10 @@ void SteeringSprite::update()
 	}
 
 	//make sure we don't get too big forces
-	force.truncate(MAX_FORCE);
+	force.truncate(maxForce);
 
 	//or too small forces
-	if (force.length() > MIN_FORCE)
+	if (force.length() > minForce)
 		acceleration = force / mass;
 	else
 		acceleration = Vector::Zero();

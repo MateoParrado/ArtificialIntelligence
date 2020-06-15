@@ -18,7 +18,7 @@ Vector Steering::seek(const Vector& target)
 
 	//make it the length of speed cap
 	temp.normalize();
-	temp *= SPEED_CAP;
+	temp *= owner->maxSpeed;
 
 	//add a force that decreases the faster we're going
 	return temp - owner->velocity;
@@ -32,7 +32,7 @@ Vector Steering::flee(const Vector& target)
 
 	//make teh vector the length of speed cal
 	temp.normalize();
-	temp *= SPEED_CAP;
+	temp *= owner->maxSpeed;
 
 	//add a force that decreases the faster we're going
 	return temp - owner->velocity;
@@ -53,7 +53,7 @@ Vector Steering::arrive(const Vector& target, double decelRate)
 		double speed = dist / 10;
 
 		//make sure we don't pass speed_cap
-		speed = (speed < SPEED_CAP) ? speed : SPEED_CAP;
+		speed = (speed < owner->maxSpeed) ? speed : owner->maxSpeed;
 
 		//make the vector teh magnitude of speed (dividing by lenSq is normalizing)
 		temp *= speed / dist;
@@ -94,7 +94,7 @@ Vector Steering::wander(Vector* target, double rad, double dist, double jitter)
 Vector Steering::wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray)
 {
 	//get the length of teh box we are using to check for collisions
-	double boxLength = MIN_BOX_LENGTH + (owner->getVelocity().length() / SPEED_CAP) * MIN_BOX_LENGTH;
+	double boxLength = MIN_BOX_LENGTH + (owner->getVelocity().length() / owner->maxSpeed) * MIN_BOX_LENGTH;
 
 	//filter out any obstacles too far away to collide with the box (as well as doing all our other filtering steps for efficiency)
 	std::vector<Obstacle> obs;

@@ -4,7 +4,7 @@ GameSeek* GameSeek::instance = nullptr;
 
 void GameSeek::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
+	sprite = new SteeringSprite(200, 200, 0.01, 0.3, 8);
 	sprite->enableBehaviors(SEEK);
 	sprite->setSeekTarget(Vector(300, 300));
 }

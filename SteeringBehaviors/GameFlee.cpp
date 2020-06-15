@@ -4,7 +4,7 @@ GameFlee* GameFlee::instance = nullptr;
 
 void GameFlee::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
+	sprite = new SteeringSprite(200, 200, 0.01, 0.1, 8);
 	sprite->enableBehaviors(FLEE);
 	sprite->setFleeTarget(Vector(300, 300));
 }

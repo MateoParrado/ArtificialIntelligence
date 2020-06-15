@@ -4,7 +4,7 @@ GameSeekAndFlee* GameSeekAndFlee::instance = nullptr;
 
 void GameSeekAndFlee::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
+	sprite = new SteeringSprite(200, 20, 0.01, 0.2, 8);
 	sprite->enableBehaviors(SEEK);
 	sprite->enableBehaviors(FLEE);
 	sprite->setSeekTarget(Vector(300, 300));

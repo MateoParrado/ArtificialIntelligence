@@ -4,7 +4,7 @@ GameArrive* GameArrive::instance = nullptr;
 
 void GameArrive::enter(SteeringManager* s)
 {
-	sprite = new SteeringSprite(200, 200);
+	sprite = new SteeringSprite(200, 200, 0.01, 0.3, 5);
 	sprite->enableBehaviors(ARRIVE);
 	sprite->setArriveTarget(Vector(300, 300));
 }
