@@ -44,3 +44,13 @@ void Obstacle::draw(SDL_Renderer* r)
 {
 	DrawCircle(r, pos.getX(), pos.getY(), this->r);
 }
+
+void Wall::updateNormal()
+{
+	normal = Vector(-(firstPoint.getY() - secondPoint.getY()), firstPoint.getX() - secondPoint.getX());
+}
+
+void Wall::draw(SDL_Renderer* r)
+{
+	SDL_RenderDrawLine(r, firstPoint.getX(), firstPoint.getY(), secondPoint.getX(), secondPoint.getY());
+}

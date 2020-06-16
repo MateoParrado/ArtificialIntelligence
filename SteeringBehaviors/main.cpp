@@ -44,16 +44,9 @@
 #include "GameEvade.h"
 #include "GameSeekAndFlee.h"
 #include "GameObstacleAvoidance.h"
+#include "GameWallAvoidance.h"
 
-#undef main
-
-//TODO
-//OBSTACLE AVOIDANCE
-//WALL AVOIDANCE
-//MAKE ARRIVE END ON TIP (TODO STEERING SPRITE.CPP)
-//MAKE EACH SCENE HAVE AN ORIGINAL AND DIFFERENT MAX FORCE / SPEED FOR SPRITES
-//FIX PROBLEM WHERE VEHICLES SPASM IN SOME CASES (LIKE IN NUMBER 7), TRY DOING THIS BY HAVING A MAXIMUM ANGLE TO VELOCITY RATIO
-
+#undef main // this is a problem with SDL
 
 int main()
 {
@@ -86,8 +79,8 @@ int main()
 			//we use this to store the first tick of each frame
 			Uint32 startingTick;
 
-				SteeringSprite s(200, 200, 0.01, 1, 5);
-				s.setVelocity(0, 1);
+			SteeringSprite s(200, 200, 0.01, 1, 5);
+			s.setVelocity(0, 1);
 
 
 			while (!done)
@@ -154,6 +147,9 @@ int main()
 							break;
 						case SDLK_8:
 							m.changeState(GameObstacleAvoidance::getInstance());
+							break;
+						case SDLK_9:
+							m.changeState(GameWallAvoidance::getInstance());
 							break;
 						}
 					}

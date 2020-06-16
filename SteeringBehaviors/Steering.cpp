@@ -182,6 +182,95 @@ Vector Steering::wanderObsAvoid(Vector* target, double rad, double dist, double 
 	//return Vector(1, 0);
 }
 
+//local method to test if two line segments intersect
+//returns -1 -1 if they don't and their intersection point if they do
+Vector lineIntersection(Vector p0, Vector p1, Vector p2, Vector p3)
+{
+	double s1_x, s1_y, s2_x, s2_y;
+	s1_x = p1.getX() - p0.getX();     s1_y = p1.getY() - p0.getY();
+	s2_x = p3.getX() - p2.getX();     s2_y = p3.getY() - p2.getY();
+
+	float s, t;
+	s = (-s1_y * (p0.getX() - p2.getX()) + s1_x * (p0.getY() - p2.getY())) / (-s2_x * s1_y + s1_x * s2_y);
+	t = (s2_x * (p0.getY() - p2.getY()) - s2_y * (p0.getX() - p2.getX())) / (-s2_x * s1_y + s1_x * s2_y);
+
+	if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+	{
+		return Vector(p0.getX() + (t * s1_x), p0.getY() + (t * s1_y));
+	}
+
+	return Vector(-1, -1); //no collision
+}
+
+Vector Steering::wanderWallAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Wall>& walls)
+{
+	double minDist = 100000000;
+	int closestWall = -1;
+	Vector closestPoint;
+
+	//first, check the whiskers and find the closest intersection point
+	Vector sideWhisker = owner->pos + Vector(SIDE_WHISKER_LENGTH, 0);
+	sideWhisker = Vector::rotate_point(owner->pos, sideWhisker, owner->angle);
+
+	Vector sideWhisker2 = owner->pos - Vector(SIDE_WHISKER_LENGTH, 0);
+	sideWhisker2 = Vector::rotate_point(owner->pos, sideWhisker2, owner->angle);
+
+	Vector frontWhisker = owner->pos - Vector(0, FRONT_WHISKER_LENGTH);
+	frontWhisker = Vector::rotate_point(owner->pos, frontWhisker, owner->angle);
+
+	//this is spaghetti
+	for (int i = 0; i < walls.size(); i++)
+	{
+		Vector intersectPoint = lineIntersection(owner->pos, sideWhisker, walls[i].firstPoint, walls[i].secondPoint);
+
+		if (intersectPoint.getX() >= 0)
+		{
+			double dist = intersectPoint.distanceSq(owner->pos);
+
+			if (intersectPoint.distanceSq(owner->pos) < minDist)
+			{
+				minDist = dist;
+				closestWall = i;
+				closestPoint = intersectPoint;
+			}
+		}
+
+		intersectPoint = lineIntersection(owner->pos, sideWhisker2, walls[i].firstPoint, walls[i].secondPoint);
+
+		if (intersectPoint.getX() >= 0)
+		{
+			double dist = intersectPoint.distanceSq(owner->pos);
+
+			if (intersectPoint.distanceSq(owner->pos) < minDist)
+			{
+				minDist = dist;
+				closestWall = i;
+				closestPoint = intersectPoint;
+			}
+		}
+
+		intersectPoint = lineIntersection(owner->pos, frontWhisker, walls[i].firstPoint, walls[i].secondPoint);
+
+		if (intersectPoint.getX() >= 0)
+		{
+			double dist = intersectPoint.distanceSq(owner->pos);
+
+			if (intersectPoint.distanceSq(owner->pos) < minDist)
+			{
+				minDist = dist;
+				closestWall = i;
+				closestPoint = intersectPoint;
+			}
+		}
+	}
+
+	if (closestWall != -1)
+	{
+		return walls[closestWall].normal * minDist * 4;
+	}
+	return wander(target, rad, dist, jitter);
+}
+
 Vector Steering::pursuit(const SteeringSprite* s)
 {
 	//if we aren't moving then start moving so we have a real heading

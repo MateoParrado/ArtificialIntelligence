@@ -5,7 +5,7 @@
 #include "Obstacle.h"
 #include <vector>
 
-//the gamestate in which two sprites wander about the screen using pseudorandom paths
+//the gamestate in which two sprites wander about the screen using pseudorandom paths and avoid obstacles
 class GameObstacleAvoidance :
 	public State<SteeringManager>
 {

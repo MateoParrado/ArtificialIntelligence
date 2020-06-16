@@ -1,6 +1,7 @@
 #include "SteeringSprite.h"
 #include "EntityManager.h"
 #include "GameObstacleAvoidance.h"
+#include "GameWallAvoidance.h"
 
 SteeringSprite::SteeringSprite(double x, double y, double minForce, double maxForce, double maxSpeed) : SimpleSprite(x, y, minForce, maxForce, maxSpeed)
 {
@@ -42,6 +43,10 @@ void SteeringSprite::update()
 	if (enabledBehaviors & WANDER_OBS_AVOID)
 	{
 		force += steer.wanderObsAvoid(&wanderTarget, 25, 100, 10, GameObstacleAvoidance::getInstance()->obs);
+	}
+	if (enabledBehaviors & WANDER_WALL_AVOID)
+	{
+		force += steer.wanderWallAvoid(&wanderTarget, 25, 100, 10, GameWallAvoidance::getInstance()->walls);
 	}
 
 	//make sure we don't get too big forces

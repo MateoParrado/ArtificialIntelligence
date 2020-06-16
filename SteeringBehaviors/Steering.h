@@ -33,6 +33,9 @@ public:
 	//same as above but also avoids any obstacle in the obs avoid array
 	Vector wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray);
 
+	//same as above but avoids walls instead of obstacles
+	Vector wanderWallAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Wall>& walls);
+
 	//try and reach the target enemy by predicting their position and seeking towards it
 	Vector pursuit(const SteeringSprite* s);
 
