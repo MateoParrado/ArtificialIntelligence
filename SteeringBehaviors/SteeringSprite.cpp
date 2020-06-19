@@ -48,6 +48,10 @@ void SteeringSprite::update()
 	{
 		force += steer.wanderWallAvoid(&wanderTarget, 25, 100, 10, GameWallAvoidance::getInstance()->walls);
 	}
+	if (enabledBehaviors & INTERPOSE)
+	{
+		force += steer.interpose(pursuitTarget, evadeTarget);
+	}
 
 	//make sure we don't get too big forces
 	force.truncate(maxForce);

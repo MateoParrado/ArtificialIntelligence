@@ -132,6 +132,7 @@
     <ClCompile Include="GameArrive.cpp" />
     <ClCompile Include="GameEvade.cpp" />
     <ClCompile Include="GameFlee.cpp" />
+    <ClCompile Include="GameInterpose.cpp" />
     <ClCompile Include="GameObstacleAvoidance.cpp" />
     <ClCompile Include="GamePursuit.cpp" />
     <ClCompile Include="GameSeek.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="GameArrive.h" />
     <ClInclude Include="GameEvade.h" />
     <ClInclude Include="GameFlee.h" />
+    <ClInclude Include="GameInterpose.h" />
     <ClInclude Include="GameObstacleAvoidance.h" />
     <ClInclude Include="GamePursuit.h" />
     <ClInclude Include="GameSeek.h" />

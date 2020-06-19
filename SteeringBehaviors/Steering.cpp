@@ -317,3 +317,19 @@ Vector Steering::evade(const SteeringSprite* s)
 
 	return flee(s->pos + s->velocity * lookAheadTime);
 }
+
+Vector Steering::interpose(const SteeringSprite* s1, const SteeringSprite* s2)
+{
+	//first we take the midpoint of the line segment connecting the two sprites
+	Vector midpoint = (s1->pos + s2->pos) / 2;
+
+	//now figure out how long it will take us to reach this midpoint
+	double timeToMidpoint = owner->pos.distance(midpoint) / owner->maxSpeed;
+
+	//we now extrapolate the positions of the other sprites into the future
+	Vector s1Pos = s1->pos + s1->velocity * timeToMidpoint;
+	Vector s2Pos = s2->pos + s2->velocity * timeToMidpoint;
+
+	//we will now try to arrive to the midpoint of the new line
+	return arrive((s1Pos + s2Pos) / 2, 3);
+}

@@ -41,5 +41,8 @@ public:
 
 	//same as pursuit but with fleeing away from that point
 	Vector evade(const SteeringSprite* s);
+
+	//tries to put itself directly between the arrive and pursuit targets
+	Vector interpose(const SteeringSprite* s1, const SteeringSprite* s2);
 };
 

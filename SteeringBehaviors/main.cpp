@@ -28,6 +28,7 @@
 //
 // 7- FLEE / SEEK MIXTURE (change seek target with left click, flee target with right click)
 //
+// I GOT BORED AND STOPPED UPDATING THIS, JUST HIT RANDOM NUMBERS AND SEE WHAT HAPPENS, OR CHECK THE CODE
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -45,8 +46,9 @@
 #include "GameSeekAndFlee.h"
 #include "GameObstacleAvoidance.h"
 #include "GameWallAvoidance.h"
+#include "GameInterpose.h"
 
-#undef main // this is a problem with SDL
+#undef main // this is a problem with SDL (and a great argument in favor of constexprs)
 
 int main()
 {
@@ -150,6 +152,9 @@ int main()
 							break;
 						case SDLK_9:
 							m.changeState(GameWallAvoidance::getInstance());
+							break;
+						case SDLK_0:
+							m.changeState(GameInterpose::getInstance());
 							break;
 						}
 					}
