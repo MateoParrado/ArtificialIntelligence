@@ -28,10 +28,10 @@ void CookSteakState::execute(Chef* c)
 //sends a message to the fisherman if the steak is done
 bool CookSteakState::onMessage(Chef* c, const Telegram& msg)
 {
-	if (msg.message == STEAKREADY)
+	if (msg.message == MessageType::STEAKREADY)
 	{
 		//id 0 is the fisherman
-		Dispatcher->dispatchMessage(c->getId(), 0, STEAKREADY);
+		Dispatcher->dispatchMessage(c->getId(), 0, MessageType::STEAKREADY);
 
 		//go back to cooking stew
 		c->changeState(CookStew);

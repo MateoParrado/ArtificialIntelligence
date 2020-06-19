@@ -51,18 +51,18 @@ void GameWallAvoidance::execute(SteeringManager* s)
 	Vector sideWhisker = sprite->getPos() + Vector(SIDE_WHISKER_LENGTH, 0);
 	sideWhisker = Vector::rotate_point(sprite->getPos(), sideWhisker, sprite->getAngle());
 
-	SDL_RenderDrawLine(s->renderer, sideWhisker.getX(), sideWhisker.getY(), sprite->getPos().getX(), sprite->getPos().getY());
+	SDL_RenderDrawLine(s->renderer, (int)sideWhisker.getX(), (int)sideWhisker.getY(), (int)sprite->getPos().getX(), (int)sprite->getPos().getY());
 
 	sideWhisker = sprite->getPos() + Vector(-SIDE_WHISKER_LENGTH, 0);
 	sideWhisker = Vector::rotate_point(sprite->getPos(), sideWhisker, sprite->getAngle());
 
-	SDL_RenderDrawLine(s->renderer, sideWhisker.getX(), sideWhisker.getY(), sprite->getPos().getX(), sprite->getPos().getY());
+	SDL_RenderDrawLine(s->renderer, (int)sideWhisker.getX(), (int)sideWhisker.getY(), (int)sprite->getPos().getX(), (int)sprite->getPos().getY());
 
 
 	sideWhisker = sprite->getPos() + Vector(0, -FRONT_WHISKER_LENGTH);
 	sideWhisker = Vector::rotate_point(sprite->getPos(), sideWhisker, sprite->getAngle());
 
-	SDL_RenderDrawLine(s->renderer, sideWhisker.getX(), sideWhisker.getY(), sprite->getPos().getX(), sprite->getPos().getY());
+	SDL_RenderDrawLine(s->renderer, (int)sideWhisker.getX(), (int)sideWhisker.getY(), (int)sprite->getPos().getX(), (int)sprite->getPos().getY());
 
 	sprite1->draw(s->renderer);
 	sprite1->update();

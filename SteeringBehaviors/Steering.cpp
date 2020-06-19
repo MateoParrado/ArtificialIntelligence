@@ -190,7 +190,7 @@ Vector lineIntersection(Vector p0, Vector p1, Vector p2, Vector p3)
 	s1_x = p1.getX() - p0.getX();     s1_y = p1.getY() - p0.getY();
 	s2_x = p3.getX() - p2.getX();     s2_y = p3.getY() - p2.getY();
 
-	float s, t;
+	double s, t;
 	s = (-s1_y * (p0.getX() - p2.getX()) + s1_x * (p0.getY() - p2.getY())) / (-s2_x * s1_y + s1_x * s2_y);
 	t = (s2_x * (p0.getY() - p2.getY()) - s2_y * (p0.getX() - p2.getX())) / (-s2_x * s1_y + s1_x * s2_y);
 

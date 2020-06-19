@@ -1,13 +1,13 @@
 #pragma once
 
 //stores fishermans location
-enum Location
+enum class Location
 {
 	RIVER, RESTAURANT, MARKET
 };
 
 //message types between fisherman and chef
-enum MessageType
+enum class MessageType
 {
 	MAKEMESTEAK, STEAKREADY
 };

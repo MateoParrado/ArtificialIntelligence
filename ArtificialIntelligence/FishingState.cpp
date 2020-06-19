@@ -9,11 +9,11 @@ FishingState* FishingState::instance = nullptr;
 
 void FishingState::enter(Fisherman* f)
 {
-	if (f->getLocation() != RIVER)
+	if (f->getLocation() != Location::RIVER)
 	{
 		f->display("walking to the river to fish");
 
-		f->setLocation(RIVER);
+		f->setLocation(Location::RIVER);
 	}
 }
 

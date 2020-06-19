@@ -10,7 +10,7 @@
 class Fisherman : public TextEntity
 {
 private:
-	Location location = MARKET;
+	Location location = Location::MARKET;
 
 	StateMachine<Fisherman>* stateMach;
 public:

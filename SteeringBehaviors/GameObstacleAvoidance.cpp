@@ -56,10 +56,10 @@ void GameObstacleAvoidance::execute(SteeringManager* s)
 	Vector c3 = Vector::rotate_point(sprite->getPos(), Vector(sprite->getPos().getX() + 15, sprite->getPos().getY() - boxLength), sprite->getAngle());
 	Vector c4 = Vector::rotate_point(sprite->getPos(), Vector(sprite->getPos().getX() - 15, sprite->getPos().getY() - boxLength), sprite->getAngle());
 
-	SDL_RenderDrawLine(s->renderer, c1.getX(), c1.getY(), c2.getX(), c2.getY());
-	SDL_RenderDrawLine(s->renderer, c1.getX(), c1.getY(), c3.getX(), c3.getY());
-	SDL_RenderDrawLine(s->renderer, c4.getX(), c4.getY(), c2.getX(), c2.getY());
-	SDL_RenderDrawLine(s->renderer, c4.getX(), c4.getY(), c3.getX(), c3.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c1.getX(), (int)c1.getY(), (int)c2.getX(), (int)c2.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c1.getX(), (int)c1.getY(), (int)c3.getX(), (int)c3.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c4.getX(), (int)c4.getY(), (int)c2.getX(), (int)c2.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c4.getX(), (int)c4.getY(), (int)c3.getX(), (int)c3.getY());
 	
 	sprite1->draw(s->renderer);
 	sprite1->update();
@@ -71,10 +71,10 @@ void GameObstacleAvoidance::execute(SteeringManager* s)
 	c3 = Vector::rotate_point(sprite1->getPos(), Vector(sprite1->getPos().getX() + 15, sprite1->getPos().getY() - boxLength), sprite1->getAngle());
 	c4 = Vector::rotate_point(sprite1->getPos(), Vector(sprite1->getPos().getX() - 15, sprite1->getPos().getY() - boxLength), sprite1->getAngle());
 
-	SDL_RenderDrawLine(s->renderer, c1.getX(), c1.getY(), c2.getX(), c2.getY());
-	SDL_RenderDrawLine(s->renderer, c1.getX(), c1.getY(), c3.getX(), c3.getY());
-	SDL_RenderDrawLine(s->renderer, c4.getX(), c4.getY(), c2.getX(), c2.getY());
-	SDL_RenderDrawLine(s->renderer, c4.getX(), c4.getY(), c3.getX(), c3.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c1.getX(), (int)c1.getY(), (int)c2.getX(), (int)c2.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c1.getX(), (int)c1.getY(), (int)c3.getX(), (int)c3.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c4.getX(), (int)c4.getY(), (int)c2.getX(), (int)c2.getY());
+	SDL_RenderDrawLine(s->renderer, (int)c4.getX(), (int)c4.getY(), (int)c3.getX(), (int)c3.getY());
 
 	for (int i = 0; i < 6; i++)
 	{

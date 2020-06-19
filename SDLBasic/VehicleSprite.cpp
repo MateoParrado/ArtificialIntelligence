@@ -6,7 +6,7 @@ void VehicleSprite::update()
 	velocity += acceleration;
 
 	//check if velocity exceeds the cap
-	velocity.truncate(SPEED_CAP);
+	velocity.truncate(maxSpeed);
 
 	//look forwards
 	angle = atan2(velocity.getY(), velocity.getX()) + M_PI/2;

@@ -12,9 +12,9 @@ void WaitForFoodState::enter(Fisherman* f)
 	f->display("I'm gonna order a steak");
 
 	//send a message to the chef (id 1) to cook him a steak
-	Dispatcher->dispatchMessage(f->getId(), 1, MAKEMESTEAK);
+	Dispatcher->dispatchMessage(f->getId(), 1, MessageType::MAKEMESTEAK);
 
-	f->setLocation(RESTAURANT);
+	f->setLocation(Location::RESTAURANT);
 }
 
 void WaitForFoodState::exit(Fisherman* f)
@@ -31,7 +31,7 @@ void WaitForFoodState::execute(Fisherman* f)
 //when we get a message that the steak is cooked, change state to eat state
 bool WaitForFoodState::onMessage(Fisherman* f, const Telegram& msg)
 {
-	if (msg.message == STEAKREADY)
+	if (msg.message == MessageType::STEAKREADY)
 	{
 		f->changeState(Eat);
 		return true;

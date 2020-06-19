@@ -24,13 +24,13 @@ int main()
 		SDL_Window* window = NULL;
 		SDL_Renderer* renderer = NULL;
 
-		SimpleSprite s(300, 300);
+		SimpleSprite s(300, 300, .01, 1, 5);
 		s.setVelocity(30, 0);
 
-		SimpleSprite s1(100, 300);
+		SimpleSprite s1(100, 300, .01, 1, 5);
 		s1.setAcceleration(0, 1);
 
-		SimpleSprite s2(300, 100);
+		SimpleSprite s2(300, 100, .01, 1, 5);
 		s2.setLocalVelocity(0.02, 0);
 
 		if (SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer) == 0)

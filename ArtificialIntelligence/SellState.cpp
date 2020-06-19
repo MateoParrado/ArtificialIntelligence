@@ -10,7 +10,7 @@ void SellState::enter(Fisherman* f)
 {
 	f->display("going to the market to sell my fish");
 
-	f->setLocation(MARKET);
+	f->setLocation(Location::MARKET);
 }
 
 void SellState::exit(Fisherman* f)

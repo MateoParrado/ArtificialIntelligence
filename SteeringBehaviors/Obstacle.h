@@ -12,7 +12,11 @@ public:
 	Vector pos;
 	double r;
 
-	Obstacle() {}
+	Obstacle() 
+	{
+		r = 0;
+		pos = Vector::Zero();
+	}
 	Obstacle(double _x, double _y, double _radius) : pos(_x, _y), r(_radius) {}
 
 	void draw(SDL_Renderer* r);

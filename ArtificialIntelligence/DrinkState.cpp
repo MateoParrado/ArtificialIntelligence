@@ -20,14 +20,14 @@ void DrinkState::execute(Fisherman* f)
 {
 	switch (f->getLocation())
 	{
-	case RIVER:
+	case Location::RIVER:
 		f->display("I'm gonna drink some refreshing water");
 		break;
-	case MARKET:
+	case Location::MARKET:
 		f->display("I'm gonna buy a soda");
 		f->money -= 1;
 		break;
-	case RESTAURANT:
+	case Location::RESTAURANT:
 		f->display("I'll order a glass of water");
 		break;
 	}

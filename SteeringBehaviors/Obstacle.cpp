@@ -42,7 +42,7 @@ void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_
 
 void Obstacle::draw(SDL_Renderer* r)
 {
-	DrawCircle(r, pos.getX(), pos.getY(), this->r);
+	DrawCircle(r, (int32_t)pos.getX(), (int32_t)pos.getY(), (int32_t)this->r);
 }
 
 void Wall::updateNormal()
@@ -52,5 +52,5 @@ void Wall::updateNormal()
 
 void Wall::draw(SDL_Renderer* r)
 {
-	SDL_RenderDrawLine(r, firstPoint.getX(), firstPoint.getY(), secondPoint.getX(), secondPoint.getY());
+	SDL_RenderDrawLine(r, (int)firstPoint.getX(), (int)firstPoint.getY(), (int)secondPoint.getX(), (int)secondPoint.getY());
 }
