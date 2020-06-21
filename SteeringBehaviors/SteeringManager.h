@@ -8,12 +8,24 @@ class SteeringManager
 private:
 	//states are game states
 	StateMachine<SteeringManager>* stateMach;
+	SteeringManager() {}
+	SteeringManager(const SteeringManager&) = delete;
+	SteeringManager& operator=(const SteeringManager&) = delete;
+
+	static SteeringManager* instance;
 
 public:
+	static SteeringManager* getInstance()
+	{
+		if (!instance) instance = new SteeringManager();
+
+		return instance;
+	}
+
 	//stored to pass to states so that they can display their sprites
 	SDL_Renderer* renderer;
 
-	SteeringManager(SDL_Renderer* r);
+	void setRenderer(SDL_Renderer* r);
 
 	void update()
 	{

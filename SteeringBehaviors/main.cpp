@@ -47,6 +47,7 @@
 #include "GameObstacleAvoidance.h"
 #include "GameWallAvoidance.h"
 #include "GameInterpose.h"
+#include "GameHide.h"
 
 #undef main // this is a problem with SDL (and a great argument in favor of constexprs)
 
@@ -74,16 +75,13 @@ int main()
 		if (SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer) == 0)
 		{
 			//this is the game controller, it handles the displaying and updating of the correct group of sprites in the right steering behavior
-			SteeringManager m(renderer);
+			SteeringManager& m = *SteeringManager::getInstance();
+			m.setRenderer(renderer);
 			
 			SDL_bool done = SDL_FALSE;
 
 			//we use this to store the first tick of each frame
 			Uint32 startingTick;
-
-			SteeringSprite s(200, 200, 0.01, 1, 5);
-			s.setVelocity(0, 1);
-
 
 			while (!done)
 			{
@@ -155,6 +153,9 @@ int main()
 							break;
 						case SDLK_0:
 							m.changeState(GameInterpose::getInstance());
+							break;
+						case SDLK_q:
+							m.changeState(GameHide::getInstance());
 							break;
 						}
 					}

@@ -13,6 +13,9 @@
 //minimum length of obstacle checking for obstacle avoiding sprites
 #define MIN_BOX_LENGTH 40.0
 
+//the distance that a hiding spot should be away from an obstacle
+#define HIDE_DIST 50
+
 //definitions for steering sprite's steering behaviors
 #define SEEK			  0b00000000000000000000000000000001
 #define FLEE			  0b00000000000000000000000000000010
@@ -23,3 +26,4 @@
 #define WANDER_OBS_AVOID  0b00000000000000000000000001000000
 #define WANDER_WALL_AVOID 0b00000000000000000000000010000000
 #define INTERPOSE         0b00000000000000000000000100000000
+#define HIDE              0b00000000000000000000001000000000

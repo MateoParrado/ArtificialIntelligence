@@ -333,3 +333,40 @@ Vector Steering::interpose(const SteeringSprite* s1, const SteeringSprite* s2)
 	//we will now try to arrive to the midpoint of the new line
 	return arrive((s1Pos + s2Pos) / 2, 3);
 }
+
+//helper function used by hide to determine the best hiding spot for every obstacle
+Vector getHidingSpot(const SteeringSprite* s, const Obstacle& o)
+{
+	//vector from sprite to object
+	Vector toOb = (o.pos - s->getPos());
+	toOb.normalize();
+
+	//scale it and add it to the objects position to get the hiding spot position
+	return (toOb * (o.r + HIDE_DIST)) + o.pos;
+}
+
+Vector Steering::hide(const SteeringSprite* s, std::vector<Obstacle>& obs)
+{
+	if (!obs.size())
+		return evade(s);
+
+	Vector minVec = getHidingSpot(s, obs[0]);
+	double minDist = minVec.distanceSq(owner->pos);
+
+	//find the closest hiding spot
+	for (int i = 1; i < obs.size(); i++)
+	{
+		Vector hideSpot = getHidingSpot(s, obs[i]);
+		double newDist = hideSpot.distanceSq(owner->pos);
+
+		if (newDist < minDist)
+		{
+			minDist = newDist;
+
+			minVec = hideSpot;
+		}
+	}
+
+	//now, arrive to the closest one
+	return(arrive(minVec, 2));
+}

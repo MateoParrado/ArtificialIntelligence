@@ -44,5 +44,9 @@ public:
 
 	//tries to put itself directly between the arrive and pursuit targets
 	Vector interpose(const SteeringSprite* s1, const SteeringSprite* s2);
+
+	//the sprite will try and hide from sprite s by positioning itself behind one of th eobstacles such that
+	//the line of sight from s to the sprite is broken
+	Vector hide(const SteeringSprite* s, std::vector<Obstacle>& obs);
 };
 

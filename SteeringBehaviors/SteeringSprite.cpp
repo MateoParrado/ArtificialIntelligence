@@ -2,6 +2,7 @@
 #include "EntityManager.h"
 #include "GameObstacleAvoidance.h"
 #include "GameWallAvoidance.h"
+#include "GameHide.h"
 
 SteeringSprite::SteeringSprite(double x, double y, double minForce, double maxForce, double maxSpeed) : SimpleSprite(x, y, minForce, maxForce, maxSpeed)
 {
@@ -42,7 +43,11 @@ void SteeringSprite::update()
 	}
 	if (enabledBehaviors & WANDER_OBS_AVOID)
 	{
-		force += steer.wanderObsAvoid(&wanderTarget, 25, 100, 10, GameObstacleAvoidance::getInstance()->obs);
+		//if we are in wander obs avoid then get it from that game state
+		if(SteeringManager::getInstance()->isInState(GameObstacleAvoidance::getInstance()))
+			force += steer.wanderObsAvoid(&wanderTarget, 25, 100, 10, GameObstacleAvoidance::getInstance()->obs);
+		else//otherwise we must be in hide so use that
+			force += steer.wanderObsAvoid(&wanderTarget, 25, 100, 10, GameHide::getInstance()->obs);
 	}
 	if (enabledBehaviors & WANDER_WALL_AVOID)
 	{
@@ -51,6 +56,10 @@ void SteeringSprite::update()
 	if (enabledBehaviors & INTERPOSE)
 	{
 		force += steer.interpose(pursuitTarget, evadeTarget);
+	}
+	if (enabledBehaviors & HIDE)
+	{
+		force += steer.hide(evadeTarget, GameHide::getInstance()->obs);
 	}
 
 	//make sure we don't get too big forces
