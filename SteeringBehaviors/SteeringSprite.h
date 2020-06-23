@@ -2,6 +2,7 @@
 #include "SimpleSprite.h"
 #include "Steering.h"
 #include "Definitions.h"
+#include "Path.h"
 
 //THIS CLASS IS DERIVED FROM:
 //Entity/Sprite for abstract functionality
@@ -19,6 +20,9 @@ private:
 
 	//used to store the boolean combination of steering behaviors that are enabled / disabled
 	uint32_t enabledBehaviors;
+
+	Node* pathNode;
+	Vector localOffset;
 
 public:
 	friend class Steering;
@@ -40,7 +44,7 @@ public:
 
 	void disableBehaviors(uint32_t b)
 	{
-		enabledBehaviors &= b;
+		enabledBehaviors &= ~b;
 	}
 
 	//target setters
@@ -50,6 +54,7 @@ public:
 	void setWanderTarget(const Vector& t) { wanderTarget = t; }
 	void setPursuitTarget(SteeringSprite* t) { pursuitTarget = t; }
 	void setEvadeTarget(SteeringSprite* t) { evadeTarget = t; }
+	void setOffset(Vector v) { localOffset = v; }
 
 	//target getters
 	const Vector& getSeekTarget() const { return seekTarget; };

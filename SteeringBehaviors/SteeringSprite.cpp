@@ -3,6 +3,7 @@
 #include "GameObstacleAvoidance.h"
 #include "GameWallAvoidance.h"
 #include "GameHide.h"
+#include "GamePathFollow.h"
 
 SteeringSprite::SteeringSprite(double x, double y, double minForce, double maxForce, double maxSpeed) : SimpleSprite(x, y, minForce, maxForce, maxSpeed)
 {
@@ -60,6 +61,21 @@ void SteeringSprite::update()
 	if (enabledBehaviors & HIDE)
 	{
 		force += steer.hide(evadeTarget, GameHide::getInstance()->obs);
+	}
+	if (enabledBehaviors & PATH_FOLLOW)
+	{
+		//make sure the path is long enough
+		if (!GamePathFollow::getInstance()->path->first || !GamePathFollow::getInstance()->path->first->next) {}
+		else
+		{
+			if (!pathNode)
+				pathNode = GamePathFollow::getInstance()->path->first;
+			force += steer.pathFollow(&pathNode);
+		}
+	}
+	if (enabledBehaviors & OFFSET_PURSUIT)
+	{
+		force += steer.offsetPursuit(pursuitTarget, localOffset);
 	}
 
 	//make sure we don't get too big forces

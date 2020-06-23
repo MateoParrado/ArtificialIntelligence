@@ -48,6 +48,8 @@
 #include "GameWallAvoidance.h"
 #include "GameInterpose.h"
 #include "GameHide.h"
+#include "GamePathFollow.h"
+#include "GameOffsetPursuit.h"
 
 #undef main // this is a problem with SDL (and a great argument in favor of constexprs)
 
@@ -106,17 +108,25 @@ int main()
 						//set the target for all of the game states sprites if we're in that instance
 						if(m.isInState(GameSeek::getInstance()))
 						   GameSeek::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
-						if (m.isInState(GameFlee::getInstance()))
+						else if (m.isInState(GameFlee::getInstance()))
 							GameFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
-						if (m.isInState(GameArrive::getInstance()))
+						else if (m.isInState(GameArrive::getInstance()))
 							GameArrive::getInstance()->sprite->setArriveTarget(Vector(event.button.x, event.button.y));
-						if (m.isInState(GameSeekAndFlee::getInstance()))
+						else if (m.isInState(GameOffsetPursuit::getInstance()))
+							GameOffsetPursuit::getInstance()->sprite->setArriveTarget(Vector(event.button.x, event.button.y));
+						else if (m.isInState(GameSeekAndFlee::getInstance()))
 						{
 							if(event.button.button == SDL_BUTTON_LEFT)
 								GameSeekAndFlee::getInstance()->sprite->setSeekTarget(Vector(event.button.x, event.button.y));
 							else if (event.button.button == SDL_BUTTON_RIGHT)
 								GameSeekAndFlee::getInstance()->sprite->setFleeTarget(Vector(event.button.x, event.button.y));
 
+						}
+
+						//add a point to the path if we're following one
+						else if (m.isInState(GamePathFollow::getInstance()))
+						{
+							GamePathFollow::getInstance()->path->addNode(Vector(event.button.x, event.button.y));
 						}
 					}
 					else if (event.type == SDL_KEYDOWN)
@@ -156,6 +166,12 @@ int main()
 							break;
 						case SDLK_q:
 							m.changeState(GameHide::getInstance());
+							break;
+						case SDLK_w:
+							m.changeState(GamePathFollow::getInstance());
+							break;
+						case SDLK_e:
+							m.changeState(GameOffsetPursuit::getInstance());
 							break;
 						}
 					}

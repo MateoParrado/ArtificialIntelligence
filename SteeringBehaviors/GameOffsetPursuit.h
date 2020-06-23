@@ -2,30 +2,32 @@
 #include <State.h>
 #include "SteeringManager.h"
 #include "SteeringSprite.h"
+#include "SmallSteeringSprite.h"
 
 //the gamestate in which we have one sprite that is seeking a point changed by clicking on the screen, and arriving and stopping at it
-class GameArrive :
+class GameOffsetPursuit :
 	public State<SteeringManager>
 {
 private:
-	GameArrive(const GameArrive&) = delete;
-	GameArrive& operator=(const GameArrive&) = delete;
+	GameOffsetPursuit(const GameOffsetPursuit&) = delete;
+	GameOffsetPursuit& operator=(const GameOffsetPursuit&) = delete;
 
-	static GameArrive* instance;
+	static GameOffsetPursuit* instance;
 
 	Vector seekPoint;
 
-	GameArrive()
+	GameOffsetPursuit()
 	{
-		sprite = nullptr;
+		sprite = smallSprite1 = smallSprite2 = smallSprite3 = nullptr;
 		seekPoint = Vector(300, 300);
 	}
 public:
 	SteeringSprite* sprite;
+	SmallSteeringSprite* smallSprite1, *smallSprite2, *smallSprite3;
 
-	static GameArrive* getInstance()
+	static GameOffsetPursuit* getInstance()
 	{
-		if (!instance) instance = new GameArrive();
+		if (!instance) instance = new GameOffsetPursuit();
 
 		return instance;
 	}
@@ -39,6 +41,6 @@ public:
 		return false;
 	}
 
-	virtual ~GameArrive() {};
+	virtual ~GameOffsetPursuit() {};
 };
 

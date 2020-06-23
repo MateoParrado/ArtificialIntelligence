@@ -2,30 +2,32 @@
 #include <State.h>
 #include "SteeringManager.h"
 #include "SteeringSprite.h"
+#include "Path.h"
 
-//the gamestate in which we have one sprite that is seeking a point changed by clicking on the screen, and arriving and stopping at it
-class GameArrive :
+//the gamestate in which a sprite follows a path that is extended by clicking your mouse
+class GamePathFollow :
 	public State<SteeringManager>
 {
 private:
-	GameArrive(const GameArrive&) = delete;
-	GameArrive& operator=(const GameArrive&) = delete;
+	GamePathFollow(const GamePathFollow&) = delete;
+	GamePathFollow& operator=(const GamePathFollow&) = delete;
 
-	static GameArrive* instance;
+	static GamePathFollow* instance;
 
 	Vector seekPoint;
 
-	GameArrive()
+	GamePathFollow()
 	{
 		sprite = nullptr;
 		seekPoint = Vector(300, 300);
 	}
 public:
 	SteeringSprite* sprite;
+	Path* path;
 
-	static GameArrive* getInstance()
+	static GamePathFollow* getInstance()
 	{
-		if (!instance) instance = new GameArrive();
+		if (!instance) instance = new GamePathFollow();
 
 		return instance;
 	}
@@ -39,6 +41,6 @@ public:
 		return false;
 	}
 
-	virtual ~GameArrive() {};
+	virtual ~GamePathFollow() {};
 };
 

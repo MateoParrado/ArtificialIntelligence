@@ -11,7 +11,7 @@
 using namespace std;
 
 //go from vector pos to vector target, overshooting it and them coming back
-Vector Steering::seek(const Vector& target)
+Vector Steering::seek(const Vector& target) const
 {
 	//get vector from pos to target
 	Vector temp = target - owner->pos;
@@ -25,7 +25,7 @@ Vector Steering::seek(const Vector& target)
 }
 
 //start and pos and go exactly away from target
-Vector Steering::flee(const Vector& target)
+Vector Steering::flee(const Vector& target) const
 {
 	//find vector from target to pos
 	Vector temp = owner->pos - target;
@@ -39,7 +39,7 @@ Vector Steering::flee(const Vector& target)
 }
 
 //go from pos to target and stop without overshooting
-Vector Steering::arrive(const Vector& target, double decelRate)
+Vector Steering::arrive(const Vector& target, double decelRate) const
 {
 	//get vector from pos to target
 	Vector temp = target - owner->pos;
@@ -70,7 +70,7 @@ Vector Steering::arrive(const Vector& target, double decelRate)
 #pragma warning ( disable: 26451)
 
 //generates ramdon seeming movement
-Vector Steering::wander(Vector* target, double rad, double dist, double jitter)
+Vector Steering::wander(Vector* target, double rad, double dist, double jitter) const
 {
 	//add small amount to target
 	*target += Vector((static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 2 - 1) * jitter,
@@ -91,7 +91,7 @@ Vector Steering::wander(Vector* target, double rad, double dist, double jitter)
 	return localTarget - owner->pos;
 }
 
-Vector Steering::wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray)
+Vector Steering::wanderObsAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Obstacle>& obsArray) const
 {
 	//get the length of teh box we are using to check for collisions
 	double boxLength = MIN_BOX_LENGTH + (owner->getVelocity().length() / owner->maxSpeed) * MIN_BOX_LENGTH;
@@ -202,7 +202,7 @@ Vector lineIntersection(Vector p0, Vector p1, Vector p2, Vector p3)
 	return Vector(-1, -1); //no collision
 }
 
-Vector Steering::wanderWallAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Wall>& walls)
+Vector Steering::wanderWallAvoid(Vector* target, double rad, double dist, double jitter, std::vector<Wall>& walls) const
 {
 	double minDist = 100000000;
 	int closestWall = -1;
@@ -271,7 +271,7 @@ Vector Steering::wanderWallAvoid(Vector* target, double rad, double dist, double
 	return wander(target, rad, dist, jitter);
 }
 
-Vector Steering::pursuit(const SteeringSprite* s)
+Vector Steering::pursuit(const SteeringSprite* s) const
 {
 	//if we aren't moving then start moving so we have a real heading
 	if (!owner->velocity.lengthSq())
@@ -298,7 +298,7 @@ Vector Steering::pursuit(const SteeringSprite* s)
 	return seek(s->pos + s->velocity * lookAheadTime);
 }
 
-Vector Steering::evade(const SteeringSprite* s)
+Vector Steering::evade(const SteeringSprite* s) const
 {
 	//if we aren't moving then start moving so we have a real heading
 	if (!owner->velocity.lengthSq())
@@ -318,7 +318,7 @@ Vector Steering::evade(const SteeringSprite* s)
 	return flee(s->pos + s->velocity * lookAheadTime);
 }
 
-Vector Steering::interpose(const SteeringSprite* s1, const SteeringSprite* s2)
+Vector Steering::interpose(const SteeringSprite* s1, const SteeringSprite* s2) const
 {
 	//first we take the midpoint of the line segment connecting the two sprites
 	Vector midpoint = (s1->pos + s2->pos) / 2;
@@ -345,7 +345,7 @@ Vector getHidingSpot(const SteeringSprite* s, const Obstacle& o)
 	return (toOb * (o.r + HIDE_DIST)) + o.pos;
 }
 
-Vector Steering::hide(const SteeringSprite* s, std::vector<Obstacle>& obs)
+Vector Steering::hide(const SteeringSprite* s, std::vector<Obstacle>& obs) const
 {
 	if (!obs.size())
 		return evade(s);
@@ -369,4 +369,24 @@ Vector Steering::hide(const SteeringSprite* s, std::vector<Obstacle>& obs)
 
 	//now, arrive to the closest one
 	return(arrive(minVec, 2));
+}
+
+Vector Steering::pathFollow(Node** n) const
+{
+	if ((*n)->pos.distanceSq(owner->pos) < 400)
+		*n = (*n)->next;
+
+	return seek((*n)->pos);
+}
+
+Vector Steering::offsetPursuit(const SteeringSprite* s, const Vector& v) const
+{
+	//calculate the offset in world space
+	Vector worldOffset = s->pos.localToWorld(v, s->angle);
+
+	//now find the lookahead time
+	double lookahead = (worldOffset - owner->pos).length() / (owner->maxSpeed + s->maxSpeed);
+
+	//arrive at that point in the future
+	return arrive(worldOffset + s->velocity * lookahead, 5);
 }
